@@ -314,7 +314,7 @@
                   <ColorPicker fx:id="fillColorPicker" onAction="#onCheckColorsConsistencyAction" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                   <ColorPicker fx:id="edgeColorPicker" onAction="#onCheckColorsConsistencyAction" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                   <ComboBox fx:id="lineTypeCombobox" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                  <Spinner fx:id="lineWidthSpinner" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                  <Spinner fx:id="lineWidthSpinner" editable="true" GridPane.columnIndex="1" GridPane.rowIndex="4" />
 					</children>
 				</GridPane>
 				<TabPane prefWidth="200.0" tabClosingPolicy="UNAVAILABLE" VBox.vgrow="ALWAYS">
