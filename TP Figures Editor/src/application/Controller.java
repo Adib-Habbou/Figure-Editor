@@ -34,6 +34,7 @@ import javafx.scene.control.Labeled;
 import javafx.scene.control.ListView;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.Spinner;
+import javafx.scene.control.SpinnerValueFactory;
 import javafx.scene.control.Toggle;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.image.Image;
@@ -499,16 +500,17 @@ public class Controller implements Initializable
 	public void initialize(URL location, ResourceBundle resources)
 	{
 		/*
-		 * TODO Controller#initialize: setting up #drawingModel
+		 * DONE Controller#initialize: setting up #drawingModel
 		 * with
 		 * 	- #drawingPane
 		 * 	- #figuresListView
 		 * 	- #logger
 		 */
-		drawingModel = null;
+		
+		drawingModel = new Drawing(drawingPane, figuresListView, logger);
 
 		/*
-		 * TODO Controller#initialize: Binds properties of UI elements to #drawingModel so that changes
+		 * DONE Controller#initialize: Binds properties of UI elements to #drawingModel so that changes
 		 * in those UI elements will directly be reflected in properties of the
 		 * #drawingModel without callbacks:
 		 * 	- #shapeTypeComboBox --> Drawing#figureTypeProperty
@@ -520,14 +522,23 @@ public class Controller implements Initializable
 		 * 	- #lineWidthSpinner --> Drawing#lineWidthProperty
 		 */
 
+		drawingModel.bindFigureTypeProperty(shapeTypeComboBox.valueProperty());
+		drawingModel.bindHasFillColorProperty(useFillColor.selectedProperty());
+		drawingModel.bindFillColorProperty(fillColorPicker.valueProperty());
+		drawingModel.bindHasEdgeColorProperty(useEdgeColor.selectedProperty());
+		drawingModel.bindEdgeColorProperty(edgeColorPicker.valueProperty());
+		drawingModel.bindLineTypeProperty(lineTypeCombobox.valueProperty());
+		drawingModel.bindLineWidthProperty(lineWidthSpinner.valueProperty());
+		
 		/*
-		 * TODO Controller#initialize: Setting up #historyManager with
+		 * DONE Controller#initialize: Setting up #historyManager with
 		 * 	- #drawingModel
 		 * 	- 32 Undo / Redo steps (changeable in #onSetHistorySizeAction)
 		 * 	- #logger
 		 */
-		historyManager = null;
-
+		
+		historyManager = new HistoryManager<>(drawingModel, 32, logger);
+		
 		/*
 		 * TODO Controller#initialize Setup #figureTypesFilter and  #figuresFilter
 		 * according to selected states of
@@ -543,12 +554,25 @@ public class Controller implements Initializable
 		 * 	- #filterLineWidthCheckMenuItem
 		 */
 
+		/*
+		filterCirclesCheckMenuItem.setDisable(true);
+		filterRectanglesCheckMenuItem.setDisable(true);
+		filterRoundedRectanglesCheckMenuItem.setDisable(true);
+		filterPolygonsCheckMenuItem.setDisable(true);
+		filterNGonsCheckMenuItem.setDisable(true);
+		filterStarsCheckMenuItem.setDisable(true);
+		filterFillColorCheckMenuItem.setDisable(true);
+		filterEdgeColorCheckMenuItem.setDisable(true);
+		filterLineTypeCheckMenuItem.setDisable(true);
+		filterLineWidthCheckMenuItem.setDisable(true);
+		*/
+		
 		// --------------------------------------------------------------------
 		// Initialize FXML related attributes
 		// --------------------------------------------------------------------
 
 		/*
-		 * TODO Setup #shapeTypeComboBox with
+		 * DONE Setup #shapeTypeComboBox with
 		 * 	- items as all FigureTypes
 		 * 	- value as FigureType.CIRCLE
 		 * TODO Controller#initialize: If you have provided a FigureTypeCell with its controller,
@@ -556,11 +580,11 @@ public class Controller implements Initializable
 		 * 	- ButtonCell as new FigureTypeCell()
 		 * 	- CellFactory as combobox -> new FigureTypeCell()
 		 */
-//		shapeTypeComboBox.getItems().addAll(FigureType.all());
-//		shapeTypeComboBox.setValue(FigureType.CIRCLE);
+		shapeTypeComboBox.getItems().addAll(FigureType.all());
+		shapeTypeComboBox.setValue(FigureType.CIRCLE);
 
 		/*
-		 * TODO Setup #lineTypeCombobox with
+		 * DONE Setup #lineTypeCombobox with
 		 * 	- items as all LineTypes
 		 * 	- value as LineType.SOLID
 		 * TODO Controller#initialize:  If you have provided a LineTypeCell CustomCell and it controller
@@ -568,11 +592,11 @@ public class Controller implements Initializable
 		 * 	- ButtonCell as new LineTypeCell()
 		 * 	- CellFactory as combobox -> new LineTypeCell()
 		 */
-//		lineTypeCombobox.getItems().addAll(LineType.all());
-//		lineTypeCombobox.setValue(LineType.SOLID);
+		lineTypeCombobox.getItems().addAll(LineType.all());
+		lineTypeCombobox.setValue(LineType.SOLID);
 
 		/*
-		 * TODO Controller#initialize: Setup #useFillColor, #useEdgeColor, #fillColorPicker and #edgeColorPicker
+		 * DONE Controller#initialize: Setup #useFillColor, #useEdgeColor, #fillColorPicker and #edgeColorPicker
 		 * in a consistent state :
 		 * 	- if #useFillColor is deselected
 		 * 		- #fillColorPicker should be disabled
@@ -582,16 +606,27 @@ public class Controller implements Initializable
 		 *		- #useFillColor should be selected
 		 * dynamic check should be performed in #onCheckColorsConsistencyAction
 		 */
+		
+		if (!useFillColor.isSelected()) {
+			fillColorPicker.setDisable(true);
+			useEdgeColor.setSelected(true);
+		}
+		
+		if (!useEdgeColor.isSelected()) {
+			edgeColorPicker.setDisable(true);
+			useFillColor.setSelected(true);
+		}
 
 		/*
-		 * TODO Controller#initialize: Setup #lineWidthSpinner with an new SimpleValueFactory
+		 * DONE Controller#initialize: Setup #lineWidthSpinner with an new SimpleValueFactory
 		 * 	- ranging from 1.0 to 32.0
 		 * 	- current value 2.0
 		 * 	- step value 1.0
 		 * see SpinnerValueFactory
 		 */
 
-
+		lineWidthSpinner = new Spinner<Double>(new SpinnerValueFactory.DoubleSpinnerValueFactory(1.0, 32.0, 2.0, 1.0));
+		
 		/*
 		 * TODO Controller#initialize: Setup #figuresListView with
 		 * 	- content from #drawingModel
@@ -603,9 +638,11 @@ public class Controller implements Initializable
 		 */
 
 		/*
-		 * TODO Controller#initialize: Setup #messagesLabel with empty or null message
+		 * DONE Controller#initialize: Setup #messagesLabel with empty or null message
 		 */
 
+		messagesLabel = null;
+		
 		/*
 		 * TODO Controller#initialize: Bind #filterToggleButton, #filterToggleCheckMenuItem and
 		 * #filteringProperty properties so that when one changes the others
@@ -615,7 +652,7 @@ public class Controller implements Initializable
 		 */
 
 		/*
-		 * TODO Controller#initialize: Disable Edit mode buttons until edit mode is on:
+		 * DONE Controller#initialize: Disable Edit mode buttons until edit mode is on:
 		 * 	- #deleteButton
 		 * 	- #moveUpButton
 		 * 	- #moveDownButton
@@ -624,6 +661,14 @@ public class Controller implements Initializable
 		 * 	- #applyStyleButton
 		 * 	- #filterToggleButton
 		 */
+		
+		deleteButton.setDisable(true);
+		moveUpButton.setDisable(true);
+		moveDownButton.setDisable(true);
+		moveTopButton.setDisable(true);
+		moveBottomButton.setDisable(true);
+		applyStyleButton.setDisable(true);
+		filterToggleButton.setDisable(true);
 
 		/*
 		 * Create #styleableButtons so they can be style updated in
@@ -651,16 +696,19 @@ public class Controller implements Initializable
 		 * 	- #drawingModel
 		 * 	- #logger
 		 */
+		
 		infoPanelController.setup(drawingPane, drawingModel, logger);
 
 		/*
 		 * Creates the #cursorTool as an EventHandler of the #drawingPane
 		 */
+		
 		cursorTool = new CursorTool(drawingPane, cursorXLabel, cursorYLabel, logger);
 
 		/*
 		 * Create current tool (by default: creation tool)
 		 */
+		
 		setTools(false);
 	}
 
