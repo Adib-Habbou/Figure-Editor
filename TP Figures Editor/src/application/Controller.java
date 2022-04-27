@@ -1328,6 +1328,25 @@ public class Controller implements Initializable
 		logger.info("Clear selection action triggred");
 		// TODO Controller#onClearSelectionAction ...
 	}
+	
+	/*
+	@FXML
+	public void onDemoAction(ActionEvent event)
+	{
+		logger.info("Demo action triggered");
+		historyManager.record();
+		NGon ngon1 = new NGon(	drawingModel.getFillColor(),
+								drawingModel.getEdgeColor(), 
+								drawingModel.getLineType(), 
+								drawingModel.getLineWidth(),
+								logger,
+								100.0,
+								100.0,
+								50.0,
+								6);
+		drawingModel.add(ngon1);
+	}
+	*/
 
 	/**
 	 * Binds two properties bi-directionnaly so when one property changes the

@@ -111,16 +111,21 @@ public class Circle extends Figure
 	 * @param figure the figure to be copied
 	 * @throws IllegalArgumentException if the provided figure is not a Circle
 	 */
-	public Circle(Figure figure)
+	public Circle(Figure figure) throws IllegalArgumentException
 	{
 		super(figure);
 		if (!(figure instanceof Circle))
 		{
 			String message = "provided figure is not a Circle: "
-			    + figure.getClass().getSimpleName();
+				+ figure.getClass().getSimpleName();
 			logger.severe(message);
 			throw new IllegalArgumentException(message);
 		}
+		javafx.scene.shape.Circle figureCircle = (javafx.scene.shape.Circle) figure.shape;
+		shape = new javafx.scene.shape.Circle(figureCircle.getCenterX(), figureCircle.getCenterY(), figureCircle.getRadius());
+		root.getChildren().add(shape);
+		applyParameters(shape);
+		setSelected(figure.selected);
 	}
 
 	/**

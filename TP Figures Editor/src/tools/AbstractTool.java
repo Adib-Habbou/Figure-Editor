@@ -611,4 +611,21 @@ public class AbstractTool<T extends Node> implements EventHandler<MouseEvent>
 	{
 		// Does Nothing: to be re-implemented in sub-classes
 	}
+	
+
+//	public void handleScrollEvent(ScrollEvent event)
+//	{
+//		scrollAmount += event.getDeltaY();
+//		int deltaSide = (int) Math.round(scrollAmount / scrollScale);
+//		// ...
+//			sidedPolygon.setNbSides(nbSides);
+//			scrollAmount = 0.0;
+//		// ...
+//		/*
+//		* ScrollEvent NEEDS to be consumed in order NOT to bubble up
+//		* in the drawingPane where it might trigger a content scroll
+//		*/
+//		event.consume();
+//	}
+
 }

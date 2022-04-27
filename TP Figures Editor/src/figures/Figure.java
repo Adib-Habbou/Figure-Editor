@@ -202,8 +202,28 @@ public abstract class Figure implements Prototype<Figure>
 			logger.severe(message);
 			throw new NullPointerException(message);
 		}
-		root.getChildren().add(figure.shape);
-		setSelected(figure.selected);
+		/*
+		* If the copied figure has gone through translation, rotation
+		* and rotation these need to be transferred to this new group
+		*/
+		root.setTranslateX(figure.root.getTranslateX());
+		root.setTranslateY(figure.root.getTranslateY());
+		root.setRotate(figure.root.getRotate());
+		root.setScaleX(figure.root.getScaleX());
+		root.setScaleY(figure.root.getScaleY());
+		/*
+		* CAUTION : figure.shape can NOT be directly transferred to this.shape
+		* such as shape = figure.shape;
+		* As this.shape will be added to this #root's children which will change
+		* the transferred shape's parent and mess up the current JavaFX scene
+		* graph.
+		* So this.shape need to be a DISTINCT shape from figure.shape with the
+		* same characteristics but it can't be done in Abstract class Figure.
+		* This needs to be performed in every sub-classes copy constructors
+		* Then the newly created shape needs to be
+		* - added to root's children
+		* - #setSelected with figure.selected
+		*/
 	}
 
 	// -------------------------------------------------------------------------
