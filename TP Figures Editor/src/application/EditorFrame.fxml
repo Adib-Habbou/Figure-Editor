@@ -102,6 +102,33 @@
 						</Menu>
 						<Menu mnemonicParsing="false" text="Figures">
 							<items>
+                        <MenuItem mnemonicParsing="false" onAction="#onUndoAction" text="Undo Last Action">
+                           <graphic>
+                              <ImageView fitHeight="16.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../icons/undo-16.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </MenuItem>
+                        <MenuItem mnemonicParsing="false" onAction="#onRedoAction" text="Redo Last Action">
+                           <graphic>
+                              <ImageView fitHeight="16.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../icons/redo-16.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </MenuItem>
+                        <MenuItem mnemonicParsing="false" onAction="#onClearAction" text="Clear Drawing">
+                           <graphic>
+                              <ImageView fitHeight="16.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../icons/erase2-16.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </MenuItem>
                         <CheckMenuItem mnemonicParsing="false" onAction="#onEditAction" text="Toggle Edit Mode">
                            <graphic>
                               <ImageView fitHeight="16.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true">
@@ -124,6 +151,86 @@
 										</ImageView>
 									</graphic>
 								</CheckMenuItem>
+                        <Menu mnemonicParsing="false" text="Shapes">
+                          <items>
+                              <CheckMenuItem fx:id="filterCirclesCheckMenuItem" mnemonicParsing="false" onAction="#onFilterChangedAction" text="Circles">
+                                 <graphic>
+                                    <ImageView fitHeight="16.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../icons/Circle-16.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic>
+                              </CheckMenuItem>
+                              <CheckMenuItem fx:id="filterEllipsesCheckMenuItem" mnemonicParsing="false" onAction="#onFilterChangedAction" text="Ellipses">
+                                 <graphic>
+                                    <ImageView fitHeight="16.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../icons/Ellipse-16.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic>
+                              </CheckMenuItem>
+                              <CheckMenuItem fx:id="filterRectanglesCheckMenuItem" mnemonicParsing="false" onAction="#onFilterChangedAction" text="Rectangles">
+                                 <graphic>
+                                    <ImageView fitHeight="16.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../icons/Rectangle-16.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic>
+                              </CheckMenuItem>
+                              <CheckMenuItem fx:id="filterRoundedRectanglesCheckMenuItem" mnemonicParsing="false" onAction="#onFilterChangedAction" text="Rounded Rectangles">
+                                 <graphic>
+                                    <ImageView fitHeight="16.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../icons/Rounded_Rectangle-16.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic>
+                              </CheckMenuItem>
+                              <CheckMenuItem fx:id="filterPolygonsCheckMenuItem" mnemonicParsing="false" onAction="#onFilterChangedAction" text="Polygons">
+                                 <graphic>
+                                    <ImageView fitHeight="16.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../icons/Polygon-16.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic>
+                              </CheckMenuItem>
+                              <CheckMenuItem fx:id="filterNGonsCheckMenuItem" mnemonicParsing="false" onAction="#onFilterChangedAction" text="NGons">
+                                 <graphic>
+                                    <ImageView fitHeight="16.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../icons/Ngon-16.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic>
+                              </CheckMenuItem>
+                              <CheckMenuItem fx:id="filterStarsCheckMenuItem" mnemonicParsing="false" onAction="#onFilterChangedAction" text="Stars">
+                                 <graphic>
+                                    <ImageView fitHeight="16.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../icons/Star-16.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic>
+                              </CheckMenuItem>
+                          </items>
+                        </Menu>
+                        <Menu mnemonicParsing="false" text="Colors">
+                           <items>
+                              <CheckMenuItem fx:id="filterFillColorCheckMenuItem" mnemonicParsing="false" onAction="#onFilterChangedAction" text="Current Fill Color" />
+                              <CheckMenuItem fx:id="filterEdgeColorCheckMenuItem" mnemonicParsing="false" onAction="#onFilterChangedAction" text="Current Edge Color" />
+                           </items>
+                        </Menu>
+                        <Menu mnemonicParsing="false" text="Lines">
+                           <items>
+                              <CheckMenuItem fx:id="filterLineTypeCheckMenuItem" mnemonicParsing="false" onAction="#onFilterChangedAction" text="Current Line Type" />
+                              <CheckMenuItem fx:id="filterLineWidthCheckMenuItem" mnemonicParsing="false" onAction="#onFilterChangedAction" text="Current Line Width" />
+                           </items>
+                        </Menu>
+                        <MenuItem mnemonicParsing="false" onAction="#onClearFiltersAction" text="Clear All Filters" />
                     </items>
                   </Menu>
 						<Menu mnemonicParsing="false" text="Preferences">
