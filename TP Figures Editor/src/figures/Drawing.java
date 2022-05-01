@@ -471,12 +471,13 @@ public class Drawing extends ModifiableObservableListBase<Figure>
 		FigureType figureType = figureTypeProperty.get();
 
 		/*
-		 * TODO Drawing#initiateFigure ...
+		 * DONE Drawing#initiateFigure ...
 		 * Calls FigureType#getFigure with the appropriate arguments to get a
 		 * newly created figure at location (x, y)
 		 */
-
-		return null;
+		
+		return figureType.getFigure(getFillColor(), getEdgeColor(), getLineType(), getLineWidth(), logger, x, y);
+	
 	}
 
 	/**

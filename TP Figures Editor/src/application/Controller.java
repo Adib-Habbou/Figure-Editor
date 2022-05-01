@@ -7,6 +7,7 @@ import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import application.cells.FigureCell;
 import application.panels.InfoPanelController;
 import figures.Drawing;
 import figures.Figure;
@@ -537,7 +538,7 @@ public class Controller implements Initializable
 		 * 	- #logger
 		 */
 		
-		historyManager = new HistoryManager<>(drawingModel, 32, logger);
+		historyManager = new HistoryManager<Figure>(drawingModel, 32, logger);
 		
 		/*
 		 * TODO Controller#initialize Setup #figureTypesFilter and  #figuresFilter
@@ -628,7 +629,7 @@ public class Controller implements Initializable
 		lineWidthSpinner = new Spinner<Double>(new SpinnerValueFactory.DoubleSpinnerValueFactory(1.0, 32.0, 2.0, 1.0));
 		
 		/*
-		 * TODO Controller#initialize: Setup #figuresListView with
+		 * DONE Controller#initialize: Setup #figuresListView with
 		 * 	- content from #drawingModel
 		 * 	- CellFactory as FigureCell
 		 * Note: #figuresListView has already been set up in Drawing constructor
@@ -636,7 +637,10 @@ public class Controller implements Initializable
 		 * 	- multiple selections
 		 * 	- #drawingModel as a ListChangeListener to #figuresListView
 		 */
-
+		
+		figuresListView.setItems(drawingModel);
+		figuresListView.setCellFactory(data -> new FigureCell());
+		
 		/*
 		 * DONE Controller#initialize: Setup #messagesLabel with empty or null message
 		 */
@@ -829,6 +833,17 @@ public class Controller implements Initializable
 		transformTool = null;
 
 		logger.info("Current tool = " + currentTool);
+		/*
+		if (editMode)
+		{
+			currentTool = new SelectionTool(currentTool);
+			transformTool = new TransformTool(transformTool);
+		} 
+		else // creation mode
+		{
+			currentTool = drawingModel.getFigureType().getCreationTool();
+		}
+		*/
 	}
 
 	/**

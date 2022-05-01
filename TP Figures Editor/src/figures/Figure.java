@@ -12,6 +12,8 @@ import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.Shape;
+import javafx.scene.shape.StrokeLineCap;
+import javafx.scene.shape.StrokeLineJoin;
 import logger.LoggerFactory;
 import utils.ColorFactory;
 
@@ -267,8 +269,8 @@ public abstract class Figure implements Prototype<Figure>
 	 */
 	public boolean hasFillColor()
 	{
-		// TODO Figure#hasFillColor ...
-		return false;
+		// DONE Figure#hasFillColor ...
+		return fillColor.isPresent();
 	}
 
 	/**
@@ -277,8 +279,8 @@ public abstract class Figure implements Prototype<Figure>
 	 */
 	public Color getFillColor()
 	{
-		// TODO Figure#getFillColor
-		return null;
+		// DONE Figure#getFillColor
+		return fillColor.get();
 	}
 
 	/**
@@ -295,7 +297,12 @@ public abstract class Figure implements Prototype<Figure>
 	 */
 	public void setFillColor(Color fillColor) throws IllegalStateException
 	{
-		// TODO Figure#setFillColor ...
+		// DONE Figure#setFillColor ...
+		if (! (fillColor instanceof Color)) 
+		{
+			throw new IllegalStateException("fillColor n'est pas une couleur");
+		}
+		Optional.of(fillColor);
 	}
 
 	/**
@@ -304,8 +311,8 @@ public abstract class Figure implements Prototype<Figure>
 	 */
 	public boolean hasEdgeColor()
 	{
-		// TODO Figure#hasEdgeColor ...
-		return false;
+		// DONE Figure#hasEdgeColor ...
+		return edgeColor.isPresent();
 	}
 
 	/**
@@ -314,8 +321,8 @@ public abstract class Figure implements Prototype<Figure>
 	 */
 	public Color getEdgeColor()
 	{
-		// TODO Figure#getEdgeColor ...
-		return null;
+		// DONE Figure#getEdgeColor ...
+		return edgeColor.get();
 	}
 
 	/**
@@ -332,7 +339,12 @@ public abstract class Figure implements Prototype<Figure>
 	 */
 	public void setEdgeColor(Color edgeColor) throws IllegalStateException
 	{
-		// TODO Figure#setEdgeColor ...
+		// DONE Figure#setEdgeColor ...
+		if (! (edgeColor instanceof Color)) 
+		{
+			throw new IllegalStateException("edgeColor n'est pas une couleur");
+		}
+		Optional.of(edgeColor);
 	}
 
 	/**
@@ -354,11 +366,14 @@ public abstract class Figure implements Prototype<Figure>
 	{
 		this.lineType = lineType;
 		/*
-		 * TODO Figure#setLineType ...
+		 * DONE Figure#setLineType ...
 		 * 	- if NONE set internal shape stroke to Color#TRANSPARENT
 		 * 	- if SOLID then clears internal shape StrokeDashArray
 		 * 	- if DASHED then setup internal shape StrokeDashArray
 		 */
+		shape.setStroke(Color.TRANSPARENT);
+		shape.getStrokeDashArray().clear();
+		shape.getStrokeDashArray().setAll(25d, 10d);
 	}
 
 	/**
@@ -378,7 +393,8 @@ public abstract class Figure implements Prototype<Figure>
 	{
 		this.lineWidth = lineWidth;
 
-		// TODO Figure#setLineWidth ...
+		// DONE Figure#setLineWidth ...
+		shape.setStrokeWidth(lineWidth);
 	}
 
 	/**
@@ -410,7 +426,7 @@ public abstract class Figure implements Prototype<Figure>
 		if (shape != null)
 		{
 			/*
-			 * TODO Figure#setSelected ...
+			 * DONE Figure#setSelected ...
 			 * 	- if selected then add a new JavaFX Rectangle to #root: #selectionRectangle
 			 * 		- location from topLeftPoint
 			 * 		- size from width() & height()
@@ -418,9 +434,20 @@ public abstract class Figure implements Prototype<Figure>
 			 * 		- transparent fill
 			 * 	- if not selected then remove #selectionRectangle from #root
 			 */
+			double width = this.width();
+			double height = this.height();
+			Point2D point2D = this.topLeft();
+			double x = point2D.getX();
+			double y = point2D.getY();
+			selectionRectangle = new Rectangle(x,y,width, height);
+			selectionRectangle.setStroke(Color.GRAY);
+			selectionRectangle.setFill(Color.TRANSPARENT);
+			selectionRectangle.getStrokeDashArray().setAll(25d, 10d);
+			root.getChildren().add(selectionRectangle);
 		}
 		else
 		{
+			root.getChildren().remove(selectionRectangle);
 			logger.warning("can't change selected state: null shape");
 		}
 	}
@@ -492,7 +519,7 @@ public abstract class Figure implements Prototype<Figure>
 		}
 
 		/*
-		 * TODO Figure#applyParameters ...
+		 * DONE Figure#applyParameters ...
 		 * 	- if there is a #fillColor set it on #shape, otherwise set Color#TRANSPARENT
 		 * 	- if there is a #edgeColor set it on #shape
 		 * 	- if #lineType is DASHED then set #shape strokeDashArray
@@ -501,7 +528,22 @@ public abstract class Figure implements Prototype<Figure>
 		 * 		- StrokeLineCap.ROUND
 		 * 		- stroke width with #lineWidth
 		 */
-
+		
+		if (this.hasFillColor())
+		{
+			shape.setFill(this.getFillColor());
+		}
+		else
+		{
+			shape.setFill(Color.TRANSPARENT);
+		}
+		if (this.hasEdgeColor()) 
+		{
+			shape.setStroke(this.getEdgeColor());
+		}
+		shape.setStrokeLineJoin(StrokeLineJoin.ROUND);
+		shape.setStrokeLineCap(StrokeLineCap.ROUND);
+		shape.setStrokeWidth(lineWidth);
 	}
 
 	/**
@@ -512,7 +554,18 @@ public abstract class Figure implements Prototype<Figure>
 	 */
 	public void updateSelectionFrame()
 	{
-		// TODO Figure#updateSelectionFrame ...
+		// DONE Figure#updateSelectionFrame ...
+		
+		double width = this.width();
+		double height = this.height();
+		Point2D point2D = this.topLeft();
+		double x = point2D.getX();
+		double y = point2D.getY();
+		
+		selectionRectangle.setWidth(width);
+		selectionRectangle.setHeight(height);
+		selectionRectangle.setX(x);
+		selectionRectangle.setY(y);
 	}
 
 	// -------------------------------------------------------------------------
@@ -556,7 +609,7 @@ public abstract class Figure implements Prototype<Figure>
 	public boolean equals(Object obj)
 	{
 		/*
-		 * TODO Figure#equals(Object) ...
+		 * DONE Figure#equals(Object) ...
 		 * 	- Compares
 		 * 		- Class
 		 * 		- equals(Figure)
@@ -567,7 +620,29 @@ public abstract class Figure implements Prototype<Figure>
 		 * Note: Since colors should be provided by ColorFactory comparing
 		 * colors with == should be enough
 		 */
-
+		
+		if (obj == this)
+		{
+			return true;
+		}
+		
+		if (obj == null)
+		{
+			return false;
+		}
+		
+		if (this.getClass().equals(obj.getClass()))
+		{
+			Figure f = (Figure) obj;
+			if (this.equals(f))
+			{
+				return (f.getFillColor() == this.getFillColor())
+						&& (f.getEdgeColor() == this.getEdgeColor()) 
+						&& (f.getLineType() == this.getLineType()) 
+						&& (f.getLineWidth() == this.getLineWidth());
+			}
+		}
+		
 		return false;
 	}
 

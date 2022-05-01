@@ -92,9 +92,10 @@ public abstract class AbstractCreationTool
 	protected void createFigure(Point2D p)
 	{
 		/*
-		 * TODO AbstractCreationTool#createFigure
+		 * DONE AbstractCreationTool#createFigure
 		 * 	- setup #figure with request #drawingModel to initiateFigure
 		 */
+		figure = drawingModel.initiateFigure(p.getX(), p.getY());
 	}
 
 	/**
@@ -105,9 +106,10 @@ public abstract class AbstractCreationTool
 	protected void updateFigure(Point2D p)
 	{
 		/*
-		 * TODO AbstractCreationTool#updateFigure
+		 * DONE AbstractCreationTool#updateFigure
 		 * set last point of figure
 		 */
+		figure.setLastPoint(p);
 	}
 
 	/**
@@ -135,12 +137,17 @@ public abstract class AbstractCreationTool
 	{
 		if (figure != null)
 		{
-
 			/*
-			 * TODO AbstractCreationTool#cancelFigure
+			 * DONE AbstractCreationTool#cancelFigure
 			 * 	- remove figure's root from #root
 			 * 	- check removed and log warning if not removed
 			 */
+			
+			if (root.getChildren().remove(figure.getRoot()))
+			{
+				logger.warning("not removed");
+			}
+			
 		}
 		else
 		{
@@ -166,11 +173,18 @@ public abstract class AbstractCreationTool
 		if (figure != null)
 		{
 			/*
-			 * TODO AbstractCreationTool#terminateFigure ...
+			 * DONE AbstractCreationTool#terminateFigure ...
 			 * 	- remove figure from #root
 			 * 	- save current state in history manager
 			 * 	- adds figure to #drawingModel
 			 */
+			
+			root.getChildren().remove(figure.getRoot());
+			
+			historyManager.record();
+			
+			drawingModel.add(figure);
+			
 		}
 		else
 		{
