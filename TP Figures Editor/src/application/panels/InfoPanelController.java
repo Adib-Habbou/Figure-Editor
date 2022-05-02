@@ -269,6 +269,26 @@ public class InfoPanelController extends FocusedFigureTool
 		/*
 		 * TODO InfoPanelController#fillInfoPanel Fill this panel's FXML attributes with data from figure
 		 */
+		
+		fillColorCircle.setFill(figure.getFillColor());
+		/*
+		figureNameLabel;
+		figureTypeImageView;
+		edgeColorCircle = figure.getEdgeColor();
+		lineTypeImageView = figure.getLineType();
+		topLeftXLabel = figure.topLeft().getX();
+		topLeftYLabel = figure.topLeft().getY();
+		bottomRightXLabel = figure.bottomRight().getX();
+		bottomRightYLabel = figure.bottomRight().getY();
+		widthLabel = figure.width();
+		heightLabel = figure.height();
+		centerXLabel = figure.getCenter().getX();
+		centerYLabel = figure.getCenter().getY();
+		translationXLabel;
+		translationYLabel;
+		rotationLabel;
+		scaleLabel;
+		*/
 	}
 
 	/**
@@ -280,7 +300,24 @@ public class InfoPanelController extends FocusedFigureTool
 	private void clearInfoPanel()
 	{
 		/*
-		 * TODO InfoPanelController#clearInfoPanel Clears this panel's FXML attributes content
+		 * DONE InfoPanelController#clearInfoPanel Clears this panel's FXML attributes content
 		 */
+		figureNameLabel = null;
+		figureTypeImageView =  null;
+		fillColorCircle =  null;
+		edgeColorCircle =  null;
+		lineTypeImageView =  null;
+		topLeftXLabel =  null;
+		topLeftYLabel =  null;
+		bottomRightXLabel =  null;
+		bottomRightYLabel =  null;
+		widthLabel =  null;
+		heightLabel =  null;
+		centerXLabel =  null;
+		centerYLabel =  null;
+		translationXLabel =  null;
+		translationYLabel =  null;
+		rotationLabel =  null;
+		scaleLabel =  null;
 	}
 }

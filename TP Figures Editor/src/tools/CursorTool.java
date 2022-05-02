@@ -48,7 +48,6 @@ public class CursorTool extends AbstractTool<Pane>
 	@Override
 	public void mouseMoved(MouseEvent event)
 	{
-		event.getSceneX()
 		/*
 		 * DONE CursorTool#mouseMoved
 		 * Display event's X & Y in xLabel & yLabel using String.format("%4.0f"...)
