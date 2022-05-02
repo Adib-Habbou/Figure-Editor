@@ -628,7 +628,7 @@ public class Controller implements Initializable
 		 * see SpinnerValueFactory
 		 */
 
-		lineWidthSpinner = new Spinner<Double>(new SpinnerValueFactory.DoubleSpinnerValueFactory(1.0, 32.0, 2.0, 1.0));
+		lineWidthSpinner.setValueFactory(new SpinnerValueFactory.DoubleSpinnerValueFactory(1.0, 32.0, 2.0, 1.0));
 		
 		/*
 		 * DONE Controller#initialize: Setup #figuresListView with
@@ -675,7 +675,7 @@ public class Controller implements Initializable
 		moveBottomButton.setDisable(true);
 		applyStyleButton.setDisable(true);
 		filterToggleButton.setDisable(true);
-
+		
 		/*
 		 * Create #styleableButtons so they can be style updated in
 		 * 	- #onDisplayButtonsWithGraphicsOnlyAction
