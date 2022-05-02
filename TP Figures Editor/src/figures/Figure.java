@@ -300,7 +300,7 @@ public abstract class Figure implements Prototype<Figure>
 		// DONE Figure#setFillColor ...
 		if (! (fillColor instanceof Color)) 
 		{
-			throw new IllegalStateException("fillColor n'est pas une couleur");
+			throw new IllegalStateException("fillColor is not a color");
 		}
 		Optional.of(fillColor);
 	}

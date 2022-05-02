@@ -49,6 +49,8 @@ import javafx.stage.WindowEvent;
 import logger.LoggerFactory;
 import tools.AbstractTool;
 import tools.CursorTool;
+import tools.SelectionTool;
+import tools.TransformTool;
 import utils.IconFactory;
 
 /**
@@ -820,7 +822,7 @@ public class Controller implements Initializable
 	protected void setTools(boolean editMode)
 	{
 		/*
-		 * TODO Controller#setTools ...
+		 * DONE Controller#setTools ...
 		 * 	- unregister #currentTool & #transformTool
 		 * 	- if edit mode
 		 * 		- setup SelectionTool as currentTool
@@ -833,17 +835,17 @@ public class Controller implements Initializable
 		transformTool = null;
 
 		logger.info("Current tool = " + currentTool);
-		/*
+		
 		if (editMode)
 		{
-			currentTool = new SelectionTool(currentTool);
-			transformTool = new TransformTool(transformTool);
+			currentTool = new SelectionTool(drawingPane, drawingModel, logger);
+			transformTool.setup(drawingPane, 0, editMode, editMode, logger);
 		} 
-		else // creation mode
+		else
 		{
-			currentTool = drawingModel.getFigureType().getCreationTool();
+			currentTool = drawingModel.getFigureType().getCreationTool(drawingPane, drawingModel, messagesLabel, historyManager, logger);
 		}
-		*/
+		
 	}
 
 	/**
