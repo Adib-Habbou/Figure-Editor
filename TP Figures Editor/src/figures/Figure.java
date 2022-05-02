@@ -434,20 +434,24 @@ public abstract class Figure implements Prototype<Figure>
 			 * 		- transparent fill
 			 * 	- if not selected then remove #selectionRectangle from #root
 			 */
-			double width = this.width();
-			double height = this.height();
-			Point2D point2D = this.topLeft();
-			double x = point2D.getX();
-			double y = point2D.getY();
-			selectionRectangle = new Rectangle(x,y,width, height);
-			selectionRectangle.setStroke(Color.GRAY);
-			selectionRectangle.setFill(Color.TRANSPARENT);
-			selectionRectangle.getStrokeDashArray().setAll(25d, 10d);
-			root.getChildren().add(selectionRectangle);
+			if (selected)
+			{
+				Point2D p = this.topLeft();
+				
+				selectionRectangle = new Rectangle(p.getX(), p.getY(), this.width(), this.height());
+				selectionRectangle.setStroke(Color.GRAY);
+				selectionRectangle.setFill(Color.TRANSPARENT);
+				selectionRectangle.getStrokeDashArray().setAll(25d, 10d);
+				
+				root.getChildren().add(selectionRectangle);
+			}
+			else
+			{
+				root.getChildren().remove(selectionRectangle);
+			}
 		}
 		else
 		{
-			root.getChildren().remove(selectionRectangle);
 			logger.warning("can't change selected state: null shape");
 		}
 	}

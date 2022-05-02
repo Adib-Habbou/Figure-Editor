@@ -490,12 +490,19 @@ public class Drawing extends ModifiableObservableListBase<Figure>
 	public Figure fromShape(Shape shape)
 	{
 		/*
-		 * TODO Drawing#fromShape
+		 * DONE Drawing#fromShape
 		 * 	- finds the figure in #figures containing this shape
 		 * 	- or finds the group index of root.getChildren() containing this shape since it should be the same as in #figures
 		 * CAUTION root.getChildren() might only contains Groups, so we have to investigate
 		 * each group's children to find the corresponding shape
 		 */
+		for (Figure figure : figures)
+		{
+			if (figure.root.getChildren().contains(shape))
+			{
+				return figure;
+			}
+		}
 		return null;
 	}
 
