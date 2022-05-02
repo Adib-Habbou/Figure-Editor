@@ -7,6 +7,7 @@ import java.util.logging.Logger;
 import application.cells.FigureIconsFactory;
 import figures.Drawing;
 import figures.Figure;
+import figures.enums.FigureType;
 import figures.enums.LineType;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -280,15 +281,58 @@ public class InfoPanelController extends FocusedFigureTool
 		heightLabel.setText("" + figure.height());
 		centerXLabel.setText("" + figure.getCenter().getX());
 		centerYLabel.setText("" + figure.getCenter().getY());
-		/*
-		figureNameLabel;
-		figureTypeImageView;
-		lineTypeImageView = figure.getLineType();
-		translationXLabel;
-		translationYLabel;
-		rotationLabel;
-		scaleLabel;
-		*/
+		
+		if (figure.getLineType() == LineType.DASHED)
+		{
+			lineTypeImageView.setImage(IconFactory.getIcon("Stroke_Dashed"));
+		}
+		if (figure.getLineType() == LineType.SOLID)
+		{
+			lineTypeImageView.setImage(IconFactory.getIcon("Stroke_Solid"));
+		}
+		
+		if (figure.equals(FigureType.CIRCLE))
+		{
+			figureTypeImageView.setImage(IconFactory.getIcon("Circle"));
+			figureNameLabel.setText("Circle");
+		}
+		if (figure.equals(FigureType.ELLIPSE))
+		{
+			figureTypeImageView.setImage(IconFactory.getIcon("Ellipse"));
+			figureNameLabel.setText("Ellipse");
+		}
+		if (figure.equals(FigureType.POLYGON))
+		{
+			figureTypeImageView.setImage(IconFactory.getIcon("Polygon"));
+			figureNameLabel.setText("Polygon");
+		}
+		if (figure.equals(FigureType.NGON))
+		{
+			figureTypeImageView.setImage(IconFactory.getIcon("Ngon"));
+			figureNameLabel.setText("Ngon");
+		}
+		if (figure.equals(FigureType.RECTANGLE))
+		{
+			figureTypeImageView.setImage(IconFactory.getIcon("Rectangle"));
+			figureNameLabel.setText("Rectangle");
+		}
+		if (figure.equals(FigureType.ROUNDED_RECTANGLE))
+		{
+			figureTypeImageView.setImage(IconFactory.getIcon("Rounded_Rectangle"));
+			figureNameLabel.setText("Rounded Rectangle");
+		}
+		if (figure.equals(FigureType.STAR))
+		{
+			figureTypeImageView.setImage(IconFactory.getIcon("Star"));
+			figureNameLabel.setText("Star");
+		}
+		
+		translationXLabel.setText(null);
+		translationYLabel.setText(null);
+		
+		rotationLabel.setText("0,0");
+		scaleLabel.setText("1,0");
+		
 	}
 
 	/**

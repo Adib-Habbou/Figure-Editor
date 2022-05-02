@@ -543,7 +543,7 @@ public class Controller implements Initializable
 		historyManager = new HistoryManager<Figure>(drawingModel, 32, logger);
 		
 		/*
-		 * TODO Controller#initialize Setup #figureTypesFilter and  #figuresFilter
+		 * DONE Controller#initialize Setup #figureTypesFilter and  #figuresFilter
 		 * according to selected states of
 		 * 	- #filterCirclesCheckMenuItem
 		 * 	- #filterRectanglesCheckMenuItem
@@ -556,8 +556,7 @@ public class Controller implements Initializable
 		 * 	- #filterLineTypeCheckMenuItem
 		 * 	- #filterLineWidthCheckMenuItem
 		 */
-
-		/*
+		
 		filterCirclesCheckMenuItem.setDisable(true);
 		filterRectanglesCheckMenuItem.setDisable(true);
 		filterRoundedRectanglesCheckMenuItem.setDisable(true);
@@ -568,7 +567,6 @@ public class Controller implements Initializable
 		filterEdgeColorCheckMenuItem.setDisable(true);
 		filterLineTypeCheckMenuItem.setDisable(true);
 		filterLineWidthCheckMenuItem.setDisable(true);
-		*/
 		
 		// --------------------------------------------------------------------
 		// Initialize FXML related attributes
@@ -799,6 +797,7 @@ public class Controller implements Initializable
 		/*
 		 * TODO Controller#onEditAction: Set Tools according to selected
 		 */
+		//applyOnOffIcons();
 
 		/*
 		 * DONE Controller#onEditAction: if creation mode then turn off fitlering
