@@ -52,8 +52,8 @@ public class CursorTool extends AbstractTool<Pane>
 		 * DONE CursorTool#mouseMoved
 		 * Display event's X & Y in xLabel & yLabel using String.format("%4.0f"...)
 		 */
-		xLabel.setText(String.format("%4.0f", event.getX()));
-		yLabel.setText(String.format("%4.0f", event.getY()));
+		xLabel.setText(String.format("%4.0f", event.getSceneX()));
+		yLabel.setText(String.format("%4.0f", event.getSceneY()));
 	}
 
 	/**

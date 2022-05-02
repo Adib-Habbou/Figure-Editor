@@ -784,22 +784,32 @@ public class Controller implements Initializable
 		Object source = event.getSource();
 		boolean selected = false;
 		/*
-		 * TODO Controller#onEditAction ...
+		 * DONE Controller#onEditAction ...
 		 * 	- setup selected from source (ToggleButton or CheckMenuItem)
 		 */
-
+		if (source.equals(editToggleButton))
+		{
+			selected = !editToggleButton.isSelected();
+		}
+		else
+		{
+			selected = ((CheckMenuItem) source).isSelected();
+		}
+		
 		/*
 		 * TODO Controller#onEditAction: Set Tools according to selected
 		 */
 
 		/*
-		 * TODO Controller#onEditAction: if creation mode then turn off fitlering
+		 * DONE Controller#onEditAction: if creation mode then turn off fitlering
 		 * 	- uncheck #filterToggleButton when editing is off
 		 * 	- calls onFilterAction
 		 */
-
+		filterToggleButton.setSelected(false);
+		filterToggleButton.onActionProperty();
+		
 		/*
-		 * TODO Controller#onEditAction: Enable / Disable edit mode buttons
+		 * DONE Controller#onEditAction: Enable / Disable edit mode buttons
 		 * 	- #deleteButton
 		 * 	- #moveUpButton
 		 * 	- #moveDownButton
@@ -808,6 +818,13 @@ public class Controller implements Initializable
 		 * 	- #applyStyleButton
 		 * 	- #filterToggleButton
 		 */
+		deleteButton.setDisable(false);
+		moveUpButton.setDisable(false);
+		moveDownButton.setDisable(false);
+		moveTopButton.setDisable(false);
+		moveBottomButton.setDisable(false);
+		applyStyleButton.setDisable(false);
+		filterToggleButton.setDisable(false);
 	}
 
 	/**
