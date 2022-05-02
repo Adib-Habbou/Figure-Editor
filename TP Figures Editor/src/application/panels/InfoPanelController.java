@@ -268,7 +268,7 @@ public class InfoPanelController extends FocusedFigureTool
 		}
 
 		/*
-		 * TODO InfoPanelController#fillInfoPanel Fill this panel's FXML attributes with data from figure
+		 * DONE InfoPanelController#fillInfoPanel Fill this panel's FXML attributes with data from figure
 		 */
 		
 		fillColorCircle.setFill(figure.getFillColor());
@@ -281,6 +281,12 @@ public class InfoPanelController extends FocusedFigureTool
 		heightLabel.setText("" + figure.height());
 		centerXLabel.setText("" + figure.getCenter().getX());
 		centerYLabel.setText("" + figure.getCenter().getY());
+		figureTypeImageView.setImage(IconFactory.getIcon(figure.getClass().getTypeName()));
+		figureNameLabel.setText(figure.getClass().getName());
+		translationXLabel.setText("0,0"); // not working
+		translationYLabel.setText("0,0"); // not working
+		rotationLabel.setText("0,0"); // not working
+		scaleLabel.setText("1,0"); // not working
 		
 		if (figure.getLineType() == LineType.DASHED)
 		{
@@ -290,49 +296,6 @@ public class InfoPanelController extends FocusedFigureTool
 		{
 			lineTypeImageView.setImage(IconFactory.getIcon("Stroke_Solid"));
 		}
-		
-		if (figure.equals(FigureType.CIRCLE))
-		{
-			figureTypeImageView.setImage(IconFactory.getIcon("Circle"));
-			figureNameLabel.setText("Circle");
-		}
-		if (figure.equals(FigureType.ELLIPSE))
-		{
-			figureTypeImageView.setImage(IconFactory.getIcon("Ellipse"));
-			figureNameLabel.setText("Ellipse");
-		}
-		if (figure.equals(FigureType.POLYGON))
-		{
-			figureTypeImageView.setImage(IconFactory.getIcon("Polygon"));
-			figureNameLabel.setText("Polygon");
-		}
-		if (figure.equals(FigureType.NGON))
-		{
-			figureTypeImageView.setImage(IconFactory.getIcon("Ngon"));
-			figureNameLabel.setText("Ngon");
-		}
-		if (figure.equals(FigureType.RECTANGLE))
-		{
-			figureTypeImageView.setImage(IconFactory.getIcon("Rectangle"));
-			figureNameLabel.setText("Rectangle");
-		}
-		if (figure.equals(FigureType.ROUNDED_RECTANGLE))
-		{
-			figureTypeImageView.setImage(IconFactory.getIcon("Rounded_Rectangle"));
-			figureNameLabel.setText("Rounded Rectangle");
-		}
-		if (figure.equals(FigureType.STAR))
-		{
-			figureTypeImageView.setImage(IconFactory.getIcon("Star"));
-			figureNameLabel.setText("Star");
-		}
-		
-		translationXLabel.setText(null);
-		translationYLabel.setText(null);
-		
-		rotationLabel.setText("0,0");
-		scaleLabel.setText("1,0");
-		
 	}
 
 	/**
