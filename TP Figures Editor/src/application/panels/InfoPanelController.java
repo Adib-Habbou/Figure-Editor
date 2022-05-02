@@ -271,19 +271,19 @@ public class InfoPanelController extends FocusedFigureTool
 		 */
 		
 		fillColorCircle.setFill(figure.getFillColor());
+		edgeColorCircle.setFill(figure.getEdgeColor());
+		topLeftXLabel.setText("" +  figure.topLeft().getX());
+		topLeftYLabel.setText("" + figure.topLeft().getY());
+		bottomRightXLabel.setText("" + figure.bottomRight().getX());
+		bottomRightYLabel.setText("" + figure.bottomRight().getY());
+		widthLabel.setText("" + figure.width());
+		heightLabel.setText("" + figure.height());
+		centerXLabel.setText("" + figure.getCenter().getX());
+		centerYLabel.setText("" + figure.getCenter().getY());
 		/*
 		figureNameLabel;
 		figureTypeImageView;
-		edgeColorCircle = figure.getEdgeColor();
 		lineTypeImageView = figure.getLineType();
-		topLeftXLabel = figure.topLeft().getX();
-		topLeftYLabel = figure.topLeft().getY();
-		bottomRightXLabel = figure.bottomRight().getX();
-		bottomRightYLabel = figure.bottomRight().getY();
-		widthLabel = figure.width();
-		heightLabel = figure.height();
-		centerXLabel = figure.getCenter().getX();
-		centerYLabel = figure.getCenter().getY();
 		translationXLabel;
 		translationYLabel;
 		rotationLabel;
