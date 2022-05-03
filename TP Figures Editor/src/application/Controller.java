@@ -30,6 +30,7 @@ import javafx.scene.control.CheckBox;
 import javafx.scene.control.CheckMenuItem;
 import javafx.scene.control.ColorPicker;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.ContentDisplay;
 import javafx.scene.control.Label;
 import javafx.scene.control.Labeled;
 import javafx.scene.control.ListView;
@@ -608,12 +609,14 @@ public class Controller implements Initializable
 		 * dynamic check should be performed in #onCheckColorsConsistencyAction
 		 */
 		
-		if (!useFillColor.isSelected()) {
+		if (!useFillColor.isSelected())
+		{
 			fillColorPicker.setDisable(true);
 			useEdgeColor.setSelected(true);
 		}
 		
-		if (!useEdgeColor.isSelected()) {
+		if (!useEdgeColor.isSelected())
+		{
 			edgeColorPicker.setDisable(true);
 			useFillColor.setSelected(true);
 		}
@@ -648,12 +651,18 @@ public class Controller implements Initializable
 		messagesLabel = null;
 		
 		/*
-		 * TODO Controller#initialize: Bind #filterToggleButton, #filterToggleCheckMenuItem and
+		 * DONE Controller#initialize: Bind #filterToggleButton, #filterToggleCheckMenuItem and
 		 * #filteringProperty properties so that when one changes the others
 		 * also changes.
 		 * 	- selectedProperty
 		 * 	- disableProperty
 		 */
+		
+		bindProperties(filterToggleButton.selectedProperty(), filteringProperty);
+		
+		bindProperties(filterToggleCheckMenuItem.selectedProperty(), filteringProperty);
+		
+		bindProperties(filterToggleCheckMenuItem.disableProperty(), filterToggleButton.disableProperty());
 
 		/*
 		 * DONE Controller#initialize: Disable Edit mode buttons until edit mode is on:
@@ -764,7 +773,8 @@ public class Controller implements Initializable
 	public void onClearAction(ActionEvent event)
 	{
 		logger.info("Clear Action triggered");
-		// TODO Controller#onClearAction
+		// DONE Controller#onClearAction
+		drawingModel.clear();
 	}
 
 	/**
@@ -781,29 +791,34 @@ public class Controller implements Initializable
 		logger.info("Edit Action triggered");
 		Object source = event.getSource();
 		boolean selected = false;
+		
 		/*
 		 * DONE Controller#onEditAction ...
 		 * 	- setup selected from source (ToggleButton or CheckMenuItem)
 		 */
-		if (source.equals(editToggleButton))
+		
+		if (source instanceof ToggleButton)
 		{
-			selected = !editToggleButton.isSelected();
+			selected = ((ToggleButton) source).isSelected();
 		}
+		
 		else
 		{
 			selected = ((CheckMenuItem) source).isSelected();
 		}
 		
 		/*
-		 * TODO Controller#onEditAction: Set Tools according to selected
+		 * DONE Controller#onEditAction: Set Tools according to selected
 		 */
-		//applyOnOffIcons();
+
+		applyOnOffIcons(editToggleButton, editToggleImageView, IconFactory.getIcon("edit"), IconFactory.getIcon("no_edit"));
 
 		/*
 		 * DONE Controller#onEditAction: if creation mode then turn off fitlering
 		 * 	- uncheck #filterToggleButton when editing is off
 		 * 	- calls onFilterAction
 		 */
+		
 		filterToggleButton.setSelected(false);
 		filterToggleButton.onActionProperty();
 		
@@ -817,6 +832,7 @@ public class Controller implements Initializable
 		 * 	- #applyStyleButton
 		 * 	- #filterToggleButton
 		 */
+		
 		deleteButton.setDisable(false);
 		moveUpButton.setDisable(false);
 		moveDownButton.setDisable(false);
@@ -1203,9 +1219,10 @@ public class Controller implements Initializable
 	{
 		logger.info("Display Buttons with Graphics only action triggered");
 		/*
-		 * TODO Controller#onDisplayButtonsWithGraphicsOnlyAction ...
+		 * DONE Controller#onDisplayButtonsWithGraphicsOnlyAction ...
 		 * setting all elts in #styleableButtons content display to graphics only
 		 */
+		((Labeled) styleableButtons).setContentDisplay(ContentDisplay.GRAPHIC_ONLY);
 	}
 
 	/**
@@ -1217,9 +1234,10 @@ public class Controller implements Initializable
 	{
 		logger.info("Display Buttons with Text and Graphics action triggered");
 		/*
-		 * TODO Controller#onDisplayButtonsWithTextAndGraphicsAction ...
+		 * DONE Controller#onDisplayButtonsWithTextAndGraphicsAction ...
 		 * setting all elts in #styleableButtons content display to text and graphics
 		 */
+		((Labeled) styleableButtons).setContentDisplay(ContentDisplay.CENTER);
 	}
 
 	/**
@@ -1231,9 +1249,10 @@ public class Controller implements Initializable
 	{
 		logger.info("Display Buttons with Text only action triggered");
 		/*
-		 * TODO Controller#onDisplayButtonsWithTextOnlyAction ...
+		 * DONE Controller#onDisplayButtonsWithTextOnlyAction ...
 		 * setting all elts in #styleableButtons content display to text only
 		 */
+		((Labeled) styleableButtons).setContentDisplay(ContentDisplay.TEXT_ONLY);
 	}
 
 	/**
@@ -1244,7 +1263,8 @@ public class Controller implements Initializable
 	public void onSetLoggerLevelUpToInfoAction(ActionEvent event)
 	{
 		logger.info("Set Logger level up to INFO");
-		// TODO Controller#onSetLoggerLevelUpToInfoAction ...
+		// DONE Controller#onSetLoggerLevelUpToInfoAction ...
+		logger.setLevel(Level.INFO);
 	}
 
 	/**
@@ -1255,7 +1275,8 @@ public class Controller implements Initializable
 	public void onSetLoggerLevelUpToWarningAction(ActionEvent event)
 	{
 		logger.info("Set Logger level up to WARNING");
-		// TODO Controller#onSetLoggerLevelUpToWarningAction ...
+		// DONE Controller#onSetLoggerLevelUpToWarningAction ...
+		logger.setLevel(Level.WARNING);
 	}
 
 	/**
@@ -1266,7 +1287,8 @@ public class Controller implements Initializable
 	public void onSetLoggerLevelUpToSevereAction(ActionEvent event)
 	{
 		logger.info("Set Logger level up to SEVERE");
-		// TODO Controller#onSetLoggerLevelUpToSevereAction ...
+		// DONE Controller#onSetLoggerLevelUpToSevereAction ...
+		logger.setLevel(Level.SEVERE);
 	}
 
 	/**
@@ -1277,7 +1299,8 @@ public class Controller implements Initializable
 	public void onSetLoggerLevelOffAction(ActionEvent event)
 	{
 		logger.info("Set Logger level to OFF");
-		// TODO Controller#onSetLoggerLevelOffAction ...
+		// DONE Controller#onSetLoggerLevelOffAction ...
+		logger.setLevel(Level.OFF);
 	}
 
 	/**

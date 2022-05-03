@@ -54,7 +54,6 @@ public class CursorTool extends AbstractTool<Pane>
 		 */
 		xLabel.setText(String.format("%4.0f", event.getX()));
 		yLabel.setText(String.format("%4.0f", event.getY()));
-		// bug bizarre quand on sort le cursuer de la zone
 	}
 
 	/**
@@ -68,7 +67,7 @@ public class CursorTool extends AbstractTool<Pane>
 		 * DONE CursorTool#mouseExited
 		 * Clears xLabel & yLabel
 		 */
-		xLabel = null;
-		yLabel = null;
+		xLabel.setText(null);;
+		yLabel.setText(null);
 	}
 }

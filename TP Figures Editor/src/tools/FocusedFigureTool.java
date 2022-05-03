@@ -99,6 +99,9 @@ public class FocusedFigureTool extends AbstractDrawingTool<Pane>
 			 */
 			focusedFigure = drawingModel.fromShape((Shape) target);
 		}
+		
+		focusedFigure = null;
+		
 	}
 
 	/**

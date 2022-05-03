@@ -513,6 +513,13 @@ public class Drawing extends ModifiableObservableListBase<Figure>
 	public void clearSelection()
 	{
 		// TODO Drawing#clearSelection ...
+		/*
+		for (int i = 0; i <= figures.length(); i++)
+		{
+			updateSelection(i, onChanged());
+		}
+		*/
+		
 	}
 
 	/**
@@ -542,11 +549,14 @@ public class Drawing extends ModifiableObservableListBase<Figure>
 		    + (selected ? "true" : "false"));
 
 		/*
-		 * TODO Drawing#updateSelection ...
+		 * DONE Drawing#updateSelection ...
 		 * Get #view selection model and either
 		 * 	- select(index) or
 		 * 	- clearSelection(index)
 		 */
+		
+		view.getSelectionModel().clearSelection(index);
+		
 	}
 
 	/**
@@ -769,9 +779,18 @@ public class Drawing extends ModifiableObservableListBase<Figure>
 			List<? extends Figure> selection = c.getList();
 
 			/*
-			 * TODO Drawing#onChanged ...
+			 * DONE Drawing#onChanged ...
 			 * Changes #figures figure selected states according to selection
 			 */
+			
+			for (Figure figure : figures)
+			{
+				if (selection.contains(figure))
+				{
+					figure.setSelected(!figure.isSelected());;
+				}
+			}
+			
 		}
 	}
 }
