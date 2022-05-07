@@ -765,6 +765,7 @@ public class Controller implements Initializable
 		logger.info("Redo Action triggered");
 		// DONE Controller#onRedoAction ...
 		historyManager.redo();
+
 	}
 
 	/**
@@ -899,6 +900,7 @@ public class Controller implements Initializable
 		for (int i = size - 1; i >= 0; i--) {
 			drawingModel.remove(figuresListView.getSelectionModel().getSelectedItems().get(i));
 		}
+
 	}
 
 	/**
@@ -909,7 +911,17 @@ public class Controller implements Initializable
 	public void onMoveUpAction(ActionEvent event)
 	{
 		logger.info("MoveUp Action triggered");
-		// TODO Controller#onMoveUpAction ...
+		// DONE Controller#onMoveUpAction ...
+		for (Figure figure : drawingModel)
+		{
+			if (figure.isSelected())
+			{
+				figure.setFillColor(drawingModel.getFillColor());
+				figure.setEdgeColor(drawingModel.getEdgeColor());
+				figure.setLineType(drawingModel.getLineType());
+				figure.setLineWidth(drawingModel.getLineWidth());
+			}
+		}
 	}
 
 	/**
@@ -954,17 +966,7 @@ public class Controller implements Initializable
 	public void onApplyStyleAction(ActionEvent event)
 	{
 		logger.info("ApplyStyle Action triggered");
-		// DONE Controller#onApplyStyleAction ...
-		for (Figure figure : drawingModel)
-		{
-			if (figure.isSelected())
-			{
-				figure.setFillColor(drawingModel.getFillColor());
-				figure.setEdgeColor(drawingModel.getEdgeColor());
-				figure.setLineType(drawingModel.getLineType());
-				figure.setLineWidth(drawingModel.getLineWidth());
-			}
-		}
+		// TODO Controller#onApplyStyleAction ...
 	}
 
 	/**
@@ -1400,6 +1402,7 @@ public class Controller implements Initializable
 		logger.info("Clear selection action triggred");
 		// DONE Controller#onClearSelectionAction ...
 		drawingModel.clearSelection();
+
 	}
 	
 	/*
