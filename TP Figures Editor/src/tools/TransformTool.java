@@ -179,6 +179,10 @@ public class TransformTool extends FocusedFigureTool
 					 * TODO TransformTool#mouseDragged: Apply translation on #figureRoot:
 					 * 	- tx = initialTranslation.x + (event.x - initialPoint.x)
 					 */
+					// motionType = NONE;
+					// initialTranslation.add(figureRoot.getTranslateX(), figureRoot.getTranslateY());
+					// figureRoot.setTranslateX(initialTranslation.getX() + (event.getX() - initialPoint.getX()));
+					// figureRoot.setTranslateY(initialTranslation.getY() + (event.getY() - initialPoint.getY()));
 					break;
 				}
 				case ROTATION:
@@ -188,6 +192,10 @@ public class TransformTool extends FocusedFigureTool
 					 * 	- v = (event - center) vector
 					 * 	- r = initialRotation + v.angle(initialVector)
 					 */
+					// motionType = NONE;
+					// initialCenter.add(focusedFigure.getCenter());
+					// figureRoot.setRotate(figureRoot.getRotate());
+					// figureRoot.setRotationAxis(figureRoot.getRotationAxis());
 					break;
 				}
 				case SCALE:
@@ -197,6 +205,10 @@ public class TransformTool extends FocusedFigureTool
 					 * 	- v = (event - center) vector
 					 * 	- sx = initialScale.x + (|v| / |initialVector|)
 					 */
+					// motionType = NONE;
+					// initialScale.add(figureRoot.getScaleX(), figureRoot.getScaleY());
+					// initialCenter.add(focusedFigure.getCenter());
+					// initialVectorMagnitude = initialVector.magnitude();
 					break;
 				}
 				default:

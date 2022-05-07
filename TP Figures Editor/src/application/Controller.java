@@ -911,17 +911,7 @@ public class Controller implements Initializable
 	public void onMoveUpAction(ActionEvent event)
 	{
 		logger.info("MoveUp Action triggered");
-		// DONE Controller#onMoveUpAction ...
-		for (Figure figure : drawingModel)
-		{
-			if (figure.isSelected())
-			{
-				figure.setFillColor(drawingModel.getFillColor());
-				figure.setEdgeColor(drawingModel.getEdgeColor());
-				figure.setLineType(drawingModel.getLineType());
-				figure.setLineWidth(drawingModel.getLineWidth());
-			}
-		}
+		// TODO Controller#onMoveUpAction ...
 	}
 
 	/**
@@ -966,7 +956,17 @@ public class Controller implements Initializable
 	public void onApplyStyleAction(ActionEvent event)
 	{
 		logger.info("ApplyStyle Action triggered");
-		// TODO Controller#onApplyStyleAction ...
+		// DONE Controller#onApplyStyleAction ...
+		for (Figure figure : drawingModel)
+		{
+			if (figure.isSelected())
+			{
+				figure.setFillColor(drawingModel.getFillColor());
+				figure.setEdgeColor(drawingModel.getEdgeColor());
+				figure.setLineType(drawingModel.getLineType());
+				figure.setLineWidth(drawingModel.getLineWidth());
+			}
+		}
 	}
 
 	/**

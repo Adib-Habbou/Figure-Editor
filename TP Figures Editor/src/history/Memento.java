@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import figures.Figure;
+
 /**
  * A State composed of a list of elements of type E to save in this Memento
  * @param <E> the type of elements in the list to save
@@ -69,7 +71,26 @@ public class Memento<E extends Prototype<E>>
 	@Override
 	public boolean equals(Object obj)
 	{
-		// TODO Memento#equals ...
+		// DONE Memento#equals ...
+		if (obj == this)
+		{
+			return true;
+		}
+		
+		if (obj == null)
+		{
+			return false;
+		}
+		
+		if (obj instanceof Memento)
+		{
+			Memento<?> m = (Memento<?>) obj;
+			if (this.equals(m))
+			{
+				return true;
+			}
+		}
+		
 		return false;
 	}
 
