@@ -45,6 +45,7 @@ public class SelectionTool extends FocusedFigureTool
 	@Override
 	public void mouseClicked(MouseEvent event)
 	{
-		// TODO SelectionTool#mouseClicked ...
+		// DONE SelectionTool#mouseClicked ...
+		drawingModel.updateSelection(drawingModel.indexOf(event), true);
 	}
 }

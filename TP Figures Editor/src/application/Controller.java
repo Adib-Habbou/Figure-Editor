@@ -751,7 +751,8 @@ public class Controller implements Initializable
 	public void onUndoAction(ActionEvent event)
 	{
 		logger.info("Undo Action triggered");
-		// TODO Controller#onUndoAction ...
+		// DONE Controller#onUndoAction ...
+		historyManager.undo();
 	}
 
 	/**
@@ -762,7 +763,8 @@ public class Controller implements Initializable
 	public void onRedoAction(ActionEvent event)
 	{
 		logger.info("Redo Action triggered");
-		// TODO Controller#onRedoAction ...
+		// DONE Controller#onRedoAction ...
+		historyManager.redo();
 	}
 
 	/**
@@ -889,10 +891,14 @@ public class Controller implements Initializable
 	{
 		logger.info("Delete Selected Action triggered");
 		/*
-		 * TODO Controller#onDeleteSelectedAction ...
+		 * DONE Controller#onDeleteSelectedAction ...
 		 * Retrieve Selected figures in #view and delete them in reverse order
 		 * to preserve valid indices provided by the selected list
 		 */
+		int size = figuresListView.getSelectionModel().getSelectedItems().size();
+		for (int i = size - 1; i >= 0; i--) {
+			drawingModel.remove(figuresListView.getSelectionModel().getSelectedItems().get(i));
+		}
 	}
 
 	/**
@@ -948,7 +954,17 @@ public class Controller implements Initializable
 	public void onApplyStyleAction(ActionEvent event)
 	{
 		logger.info("ApplyStyle Action triggered");
-		// TODO Controller#onApplyStyleAction ...
+		// DONE Controller#onApplyStyleAction ...
+		for (Figure figure : drawingModel)
+		{
+			if (figure.isSelected())
+			{
+				figure.setFillColor(drawingModel.getFillColor());
+				figure.setEdgeColor(drawingModel.getEdgeColor());
+				figure.setLineType(drawingModel.getLineType());
+				figure.setLineWidth(drawingModel.getLineWidth());
+			}
+		}
 	}
 
 	/**
@@ -1382,7 +1398,8 @@ public class Controller implements Initializable
 	public void onClearSelectionAction(ActionEvent event)
 	{
 		logger.info("Clear selection action triggred");
-		// TODO Controller#onClearSelectionAction ...
+		// DONE Controller#onClearSelectionAction ...
+		drawingModel.clearSelection();
 	}
 	
 	/*

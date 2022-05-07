@@ -102,14 +102,19 @@ public class HistoryManager<E extends Prototype<E>>
 	 * Resize {@link #undoStack} & {@link #redoStack} to new Size.
 	 * If current size > provided size, {@link #undoStack} & {@link #redoStack}
 	 * are trimmed to provided size, or left unchanged otherwise.
-	 * @param size the new Undo / rEdo stack sizes
+	 * @param size the new Undo / Redo stack sizes
 	 */
 	public void setSize(int size)
 	{
 		if (this.size > size)
 		{
-			// TODO HistoryManager#setSize: Trim #undoStack & #redoStack if required
+			// DONE HistoryManager#setSize: Trim #undoStack & #redoStack if required
+			undoStack.removeLast();
+			redoStack.removeLast();
+			this.size = size;
 		}
+		undoSize();
+		redoSize();
 	}
 
 	/**
@@ -123,7 +128,10 @@ public class HistoryManager<E extends Prototype<E>>
 	 */
 	public void record()
 	{
-		// TODO HistoryManager#record ...
+		// DONE HistoryManager#record ...
+		Memento<E> memento = originator.createMemento();
+		pushUndo(memento);
+		redoStack.clear();
 	}
 
 	/**
@@ -137,7 +145,15 @@ public class HistoryManager<E extends Prototype<E>>
 	 */
 	public void undo()
 	{
-		// TODO HistoryManager#undo ...
+		// DONE HistoryManager#undo ...
+		Memento<E> state = originator.createMemento();
+		if (state != null)
+		{
+			pushRedo(state);
+			originator.createMemento();
+			popUndo();
+			originator.setMemento(state);
+		}
 	}
 
 	/**
@@ -162,7 +178,15 @@ public class HistoryManager<E extends Prototype<E>>
 	 */
 	public void redo()
 	{
-		// TODO HistoryManager#redo ...
+		// DONE HistoryManager#redo ...
+		Memento<E> state = originator.createMemento();
+		if (state != null)
+		{
+			pushUndo(state);
+			originator.createMemento();
+			popRedo();
+			originator.setMemento(state);
+		}
 	}
 
 	/**
