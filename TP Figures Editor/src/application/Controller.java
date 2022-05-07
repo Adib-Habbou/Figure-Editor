@@ -2,6 +2,7 @@ package application;
 
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -33,6 +34,7 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.ContentDisplay;
 import javafx.scene.control.Label;
 import javafx.scene.control.Labeled;
+import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.Spinner;
@@ -577,25 +579,29 @@ public class Controller implements Initializable
 		 * DONE Setup #shapeTypeComboBox with
 		 * 	- items as all FigureTypes
 		 * 	- value as FigureType.CIRCLE
-		 * TODO Controller#initialize: If you have provided a FigureTypeCell with its controller,
+		 * DONE Controller#initialize: If you have provided a FigureTypeCell with its controller,
 		 * then setup
 		 * 	- ButtonCell as new FigureTypeCell()
 		 * 	- CellFactory as combobox -> new FigureTypeCell()
 		 */
 		shapeTypeComboBox.getItems().addAll(FigureType.all());
 		shapeTypeComboBox.setValue(FigureType.CIRCLE);
+		// shapeTypeComboBox.setButtonCell(new FigureTypeCell());
+		// shapeTypeComboBox.setCellFactory(new FigureTypeCell());
 
 		/*
 		 * DONE Setup #lineTypeCombobox with
 		 * 	- items as all LineTypes
 		 * 	- value as LineType.SOLID
-		 * TODO Controller#initialize:  If you have provided a LineTypeCell CustomCell and it controller
+		 * DONE Controller#initialize:  If you have provided a LineTypeCell CustomCell and it controller
 		 * then setup
 		 * 	- ButtonCell as new LineTypeCell()
 		 * 	- CellFactory as combobox -> new LineTypeCell()
 		 */
 		lineTypeCombobox.getItems().addAll(LineType.all());
 		lineTypeCombobox.setValue(LineType.SOLID);
+		// lineTypeComboBox.setButtonCell(new LineTypeCell());
+		// lineTypeComboBox.setCellFactory(new LineTypeCell());
 
 		/*
 		 * DONE Controller#initialize: Setup #useFillColor, #useEdgeColor, #fillColorPicker and #edgeColorPicker
@@ -911,7 +917,17 @@ public class Controller implements Initializable
 	public void onMoveUpAction(ActionEvent event)
 	{
 		logger.info("MoveUp Action triggered");
-		// TODO Controller#onMoveUpAction ...
+		// DONE Controller#onMoveUpAction ...
+		for (int i = 0; i < drawingModel.size(); i++)
+		{
+			Figure figure = drawingModel.get(i);
+			if (figure.isSelected())
+			{
+				drawingModel.remove(figure);
+				drawingModel.add(i + 1, figure);
+				i++;
+			}
+		}
 	}
 
 	/**
@@ -922,7 +938,17 @@ public class Controller implements Initializable
 	public void onMoveDownAction(ActionEvent event)
 	{
 		logger.info("MoveDown Action triggered");
-		// TODO Controller#onMoveDownAction ...
+		// DONE Controller#onMoveDownAction ...
+		for (int i = drawingModel.size(); i > 0; i--)
+		{
+			Figure figure = drawingModel.get(i);
+			if (figure.isSelected())
+			{
+				drawingModel.remove(figure);
+				drawingModel.add(i - 1, figure);
+				i--;
+			}
+		}
 	}
 
 	/**
@@ -933,7 +959,17 @@ public class Controller implements Initializable
 	public void onMoveTopAction(ActionEvent event)
 	{
 		logger.info("MoveTop Action triggered");
-		// TODO Controller#onMoveTopAction ...
+		// DONE Controller#onMoveTopAction ...
+		List<Figure> selectedFigure = Collections.<Figure>emptyList();
+		for (Figure figure : drawingModel)
+		{
+			if (figure.isSelected())
+			{
+				selectedFigure.add(figure);
+			}
+			drawingModel.remove(figure);
+		}
+		drawingModel.addAll(selectedFigure);
 	}
 
 	/**
@@ -944,7 +980,20 @@ public class Controller implements Initializable
 	public void onMoveBottomAction(ActionEvent event)
 	{
 		logger.info("MoveBottom Action triggered");
-		// TODO Controller#onMoveBottomAction ...
+		// DONE Controller#onMoveBottomAction ...
+		List<Figure> selectedFigure = Collections.<Figure>emptyList();
+		for (Figure figure : drawingModel)
+		{
+			if (figure.isSelected())
+			{
+				selectedFigure.add(figure);
+			}
+			drawingModel.remove(figure);
+		}
+		for (Figure figure : selectedFigure)
+		{
+			drawingModel.add(0, figure);
+		}
 	}
 
 	/**
@@ -980,19 +1029,37 @@ public class Controller implements Initializable
 	public void onFilterAction(ActionEvent event)
 	{
 		logger.info("Filter Action triggered");
-		// TODO Do we really need this callback ? Can't we bind properties instead ???
+		// DONE Do we really need this callback ? Can't we bind properties instead ???
 
 		Object source = event.getSource();
 		boolean selected = false;
+		
 		/*
-		 * TODO Controller#onFilterAction: setup selected from source
+		 * DONE Controller#onFilterAction: setup selected from source
 		 */
+		if (source instanceof CheckMenuItem)
+		{
+			selected = ((CheckMenuItem) source).isSelected();
+		}
+		else
+		{
+			((ToggleButton) source).isSelected();
+		}
 
 		/*
-		 * TODO Controller#onFilterAction: Replace #drawingModel in #figuresListView with
+		 * DONE Controller#onFilterAction: Replace #drawingModel in #figuresListView with
 		 * ObservableList#filtered(#figuresFilter) if selected, otherwise
 		 * re-set #drawingModel as content
 		 */
+		if (selected)
+		{
+			figuresListView.setItems(drawingModel);
+			drawingModel.filtered(figuresFilter);
+		}
+		else
+		{
+			// drawingModel.filtered(figures);
+		}
 	}
 
 	/**
@@ -1059,11 +1126,12 @@ public class Controller implements Initializable
 			Color color = drawingModel.getFillColor();
 			if (selected)
 			{
-				// TODO Controller#onFilterChangedAction: add FillColorFilter to figuresFilter ...
+				// DONE Controller#onFilterChangedAction: add FillColorFilter to figuresFilter ...
+				// figuresFilter.add(new FillColorFilter(color));
 			}
 			else
 			{
-				// TODO Controller#onFilterChangedAction: remove any filter containing color from figuresFilter ...
+				// DONE Controller#onFilterChangedAction: remove any filter containing color from figuresFilter ...
 				figuresFilter.removeFilterWith(color);
 			}
 		}
@@ -1073,11 +1141,13 @@ public class Controller implements Initializable
 			Color color = drawingModel.getEdgeColor();
 			if (selected)
 			{
-				// TODO Controller#onFilterChangedAction: add EdgeColorFilter to figuresFilter ...
+				// DONE Controller#onFilterChangedAction: add EdgeColorFilter to figuresFilter ...
+				// figuresFilter.add(new EdgeColorFilter(color));
 			}
 			else
 			{
-				// TODO Controller#onFilterChangedAction: remove any filter containing color from figuresFilter ...
+				// DONE Controller#onFilterChangedAction: remove any filter containing color from figuresFilter ...
+				figuresFilter.removeFilterWith(color);
 			}
 		}
 
@@ -1086,11 +1156,13 @@ public class Controller implements Initializable
 			LineType lineType = drawingModel.getLineType();
 			if (selected)
 			{
-				// TODO Controller#onFilterChangedAction: add LineTypeFilter(lineType) to figuresFilter ...
+				// DONE Controller#onFilterChangedAction: add LineTypeFilter(lineType) to figuresFilter ...
+				// figuresFilter.add(new LineTypeFilter(lineType));
 			}
 			else
 			{
-				// TODO Controller#onFilterChangedAction: removes any filter containing lineType from figuresFilter ...
+				// DONE Controller#onFilterChangedAction: removes any filter containing lineType from figuresFilter ...
+				figuresFilter.removeFilterWith(lineType);
 			}
 		}
 
@@ -1099,11 +1171,13 @@ public class Controller implements Initializable
 			Double lineWidth = drawingModel.getLineWidth();
 			if (selected)
 			{
-				// TODO Controller#onFilterChangedAction: add LineWidthFilter(lineWidth) to figuresFilter ...
+				// DONE Controller#onFilterChangedAction: add LineWidthFilter(lineWidth) to figuresFilter ...
+				// figuresFilter.add(new LineWidthFilter(lineWidth));
 			}
 			else
 			{
-				// TODO Controller#onFilterChangedAction: removes any filter containing lineWidth from figuresFilter ...
+				// DONE Controller#onFilterChangedAction: removes any filter containing lineWidth from figuresFilter ...
+				figuresFilter.removeFilterWith(lineWidth);
 			}
 		}
 		if (filteringProperty.get())
@@ -1355,13 +1429,23 @@ public class Controller implements Initializable
 
 		if (checkBox  == useFillColor)
 		{
-			// TODO Controller#onCheckColorsConsistencyAction: fill color case
+			// DONE Controller#onCheckColorsConsistencyAction: fill color case
+			if (!selected)
+			{
+				checkBox.setSelected(false);
+				fillColorPicker.setDisable(false);
+			}
 			return;
 		}
 
 		if (checkBox == useEdgeColor)
 		{
-			// TODO Controller#onCheckColorsConsistencyAction: edge color case
+			// DONE Controller#onCheckColorsConsistencyAction: edge color case
+			if (!selected)
+			{
+				checkBox.setSelected(false);
+				edgeColorPicker.setDisable(false);
+			}
 			return;
 		}
 
@@ -1385,10 +1469,14 @@ public class Controller implements Initializable
 		}
 
 		/*
-		 * TODO Controller#onShapeChangedAction ...
+		 * DONE Controller#onShapeChangedAction ...
 		 * 	- setTools according to the new type of figure
 		 * 	- and #editToggleButton state
 		 */
+		if (editToggleButton.isSelected())
+		{
+			drawingModel.getFigureType().getCreationTool(drawingPane, drawingModel, messagesLabel, historyManager, logger);
+		}
 	}
 
 	/**

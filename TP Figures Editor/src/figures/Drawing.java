@@ -565,7 +565,10 @@ public class Drawing extends ModifiableObservableListBase<Figure>
 	 */
 	public void refresh()
 	{
-		// TODO Drawing#refresh() ...
+		// DONE Drawing#refresh() ...
+		ObservableList<Node> children = root.getChildren();
+		children.clear();
+		children.add(root);
 	}
 
 	/**
@@ -577,7 +580,15 @@ public class Drawing extends ModifiableObservableListBase<Figure>
 	 */
 	public void refresh(Predicate<Figure> predicate)
 	{
-		// TODO Drawing#refresh(Predicate<Figure> predicate) ...
+		// DONE Drawing#refresh(Predicate<Figure> predicate) ...
+		/*
+		ObservableList<Node> children = root.getChildren();
+		children.clear();
+		if (predicate.test(figure.root))
+		{
+			children.add(root);
+		}
+		*/
 	}
 
 	// ------------------------------------------------------------------------

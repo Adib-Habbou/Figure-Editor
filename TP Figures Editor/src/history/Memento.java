@@ -4,8 +4,6 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-import figures.Figure;
-
 /**
  * A State composed of a list of elements of type E to save in this Memento
  * @param <E> the type of elements in the list to save
@@ -81,7 +79,7 @@ public class Memento<E extends Prototype<E>>
 		{
 			return false;
 		}
-		
+				
 		if (obj instanceof Memento)
 		{
 			Memento<?> m = (Memento<?>) obj;
@@ -90,7 +88,7 @@ public class Memento<E extends Prototype<E>>
 				return true;
 			}
 		}
-		
+
 		return false;
 	}
 
