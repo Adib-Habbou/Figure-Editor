@@ -152,7 +152,7 @@ public class TransformTool extends FocusedFigureTool
 				
 				if(controlDown)
 				{
-					motionType = Motion.TRANSLATION;
+					motionType = Motion.SCALE;
 					initialTranslation.add(figureRoot.getTranslateX(), figureRoot.getTranslateY());
 				}
 				else if (shiftDown)
@@ -164,7 +164,7 @@ public class TransformTool extends FocusedFigureTool
 				}
 				else
 				{
-					motionType = Motion.SCALE;
+					motionType = Motion.TRANSLATION;
 					initialCenter = focusedFigure.getCenter();
 					initialScale.add(figureRoot.getScaleX(), figureRoot.getScaleY());
 					initialVector.add(initialCenter.getX() - initialPoint.getX(), initialCenter.getY() - initialPoint.getY());
