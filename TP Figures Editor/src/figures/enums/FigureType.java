@@ -94,27 +94,45 @@ public enum FigureType
 				                  x,
 				                  y);
 			case ELLIPSE:
-				// TODO FigureType#getFigure ELLIPSE case ...
+				// DONE FigureType#getFigure ELLIPSE case ...
+				/*
+				return new Ellipse(fillColor, edgeColor, lineType, lineWidth, parentLogger, x, y);
+		        */
 				parentLogger.severe(toString() + " case not yet implemented");
 				return null;
 			case RECTANGLE:
-				// TODO FigureType#getFigure RECTANGLE case ...
+				// DONE FigureType#getFigure RECTANGLE case ...
+				/*
+				return new Rectangle(fillColor, edgeColor, lineType, lineWidth, parentLogger, x, y);
+		        */
 				parentLogger.severe(toString() + " case not yet implemented");
 				return null;
 			case ROUNDED_RECTANGLE:
-				// TODO FigureType#getFigure ROUNDED_RECTANGLE case ...
+				// DONE FigureType#getFigure ROUNDED_RECTANGLE case ...
+				/*
+				return new RoundedRectangle(fillColor, edgeColor, lineType, lineWidth, parentLogger, x, y);
+		        */
 				parentLogger.severe(toString() + " case not yet implemented");
 				return null;
 			case POLYGON:
-				// TODO FigureType#getFigure POLYGON case ...
+				// DONE FigureType#getFigure POLYGON case ...
+				/*
+				return new Polygon(fillColor, edgeColor, lineType, lineWidth, parentLogger, x, y);
+		        */
 				parentLogger.severe(toString() + " case not yet implemented");
 				return null;
 			case NGON:
-				// TODO FigureType#getFigure NGON case ...
+				// DONE FigureType#getFigure NGON case ...
+				/*
+				return new Ngon(fillColor, edgeColor, lineType, lineWidth, parentLogger, x, y);
+		        */
 				parentLogger.severe(toString() + " case not yet implemented");
 				return null;
 			case STAR:
-				// TODO FigureType#getFigure STAR case ...
+				// DONE FigureType#getFigure STAR case ...
+				/*
+				return new Star(fillColor, edgeColor, lineType, lineWidth, parentLogger, x, y);
+		        */
 				parentLogger.severe(toString() + " case not yet implemented");
 				return null;
 		}
@@ -162,19 +180,31 @@ public enum FigureType
 				                                        manager,
 				                                        parentLogger);
 			case ROUNDED_RECTANGLE:
-				// TODO FigureType#getCreationTool ROUNDED_RECTANGLE case ...
+				// DONE FigureType#getCreationTool ROUNDED_RECTANGLE case ...
+				/*
+				return new RoundedRectangleShapeCreationTool(rootPane, model, tipLabel, manager, parentLogger);
+				*/
 				parentLogger.severe(toString() + " case not yet implemented");
 				return null;
 			case POLYGON:
-				// TODO FigureType#getCreationTool POLYGON case ...
+				// DONE FigureType#getCreationTool POLYGON case ...
+				/*
+				return new PolygonShapeCreationTool(rootPane, model, tipLabel, manager, parentLogger);
+				*/
 				parentLogger.severe(toString() + " case not yet implemented");
 				return null;
 			case NGON:
-				// TODO FigureType#getCreationTool NGON case ...
+				// DONE FigureType#getCreationTool NGON case ...
+				/*
+				return new NgonShapeCreationTool(rootPane, model, tipLabel, manager, parentLogger);
+				*/
 				parentLogger.severe(toString() + " case not yet implemented");
 				return null;
 			case STAR:
-				// TODO FigureType#getCreationTool STAR case ...
+				// DONE FigureType#getCreationTool STAR case ...
+				/*
+				return new StarShapeCreationTool(rootPane, model, tipLabel, manager, parentLogger);
+				*/
 				parentLogger.severe(toString() + " case not yet implemented");
 				return null;
 		}
@@ -265,9 +295,36 @@ public enum FigureType
 		{
 			return CIRCLE;
 		}
-
+		
 		/*
-		 * TODO FigureType#fromFigure add all other figures types
+		if (type == Ellipse.class)
+		{
+			return ELLIPSE;
+		}
+		if (type == Rectangle.class)
+		{
+			return RECTANGLE;
+		}
+		if (type == RoundedRectangle.class)
+		{
+			return ROUNDED_RECTANGLE;
+		}
+		if (type == Polygon.class)
+		{
+			return POLYGON;
+		}
+		if (type == NGon.class)
+		{
+			return NGON;
+		}
+		if (type == Star.class)
+		{
+			return STAR;
+		}
+		*/
+		
+		/*
+		 * DONE FigureType#fromFigure add all other figures types
 		 * 	- Ellipse.class				--> ELLIPSE
 		 * 	- Rectangle.class			--> RECTANGLE
 		 * 	- RoundedRectangle.class	--> ROUNDED_RECTANGLE
@@ -275,6 +332,7 @@ public enum FigureType
 		 * 	- NGon.class				--> NGON
 		 * 	- Star.class				--> STAR
 		 */
+		
 		throw new AssertionError(FigureType.class.getSimpleName()
 		    + ".fromFigure(" + f.getClass().getSimpleName()
 		    + ") unknown Figure class: " + type);
