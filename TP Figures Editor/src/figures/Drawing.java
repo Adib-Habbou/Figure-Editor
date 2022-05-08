@@ -554,6 +554,7 @@ public class Drawing extends ModifiableObservableListBase<Figure>
 		 */
 		
 		view.getSelectionModel().clearSelection(index);
+		view.getSelectionModel().select(index);
 		
 	}
 
