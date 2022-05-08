@@ -140,7 +140,7 @@ public class TransformTool extends FocusedFigureTool
 				boolean shiftDown = event.isShiftDown();
 
 				 /*
-				  * TODO TransformTool#mousePressed ... initialize motion by setting
+				  * DONE TransformTool#mousePressed ... initialize motion by setting
 				  * 	- motionType
 				  * 	- initialCenter
 				  * 	- initialVector
@@ -149,6 +149,34 @@ public class TransformTool extends FocusedFigureTool
 				  * 	- ...
 				  * depending of the type of motion
 				  */
+				
+				switch (motionType)
+				{
+					case TRANSLATION:
+					{
+						initialPoint = focusedFigure.getCenter();
+						initialTranslation.add(figureRoot.getTranslateX(), figureRoot.getTranslateY());
+						break;
+					}
+					case ROTATION:
+					{
+						initialPoint = focusedFigure.getCenter();
+						initialVector = null;
+						initialRotation = figureRoot.getRotate();
+						break;
+					}
+					case SCALE:
+					{
+						initialPoint = focusedFigure.getCenter();
+						initialVector = null;
+						initialScale = initialScale.add(figureRoot.getScaleX(), figureRoot.getScaleY());
+						initialVectorMagnitude = initialVector.magnitude();
+						break;
+					}
+					default:
+						logger.warning("unkown motion type " + motionType);
+						break;
+				}
 
 				step++;
 				event.consume();

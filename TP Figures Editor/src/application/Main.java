@@ -97,7 +97,7 @@ public class Main extends Application
 		try
 		{
 			/*
-			 * TODO Main#start Complete EditorFrame.fxml with SceneBuilder until
+			 * DONE Main#start Complete EditorFrame.fxml with SceneBuilder until
 			 * every FXML annotated attribute defined in Controller is assigned
 			 * as an fx:id in the fxml file. Otherwise the load method below
 			 * will raise an IOException.
