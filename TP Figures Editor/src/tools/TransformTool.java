@@ -150,34 +150,25 @@ public class TransformTool extends FocusedFigureTool
 				  * depending of the type of motion
 				  */
 				
-				switch (motionType)
+				if(controlDown)
 				{
-					case TRANSLATION:
-					{
-						motionType = Motion.TRANSLATION;
-						initialTranslation.add(figureRoot.getTranslateX(), figureRoot.getTranslateY());
-						break;
-					}
-					case ROTATION:
-					{
-						motionType = Motion.ROTATION;
-						initialCenter = focusedFigure.getCenter();
-						initialRotation = figureRoot.getRotate();
-						initialVector.add(initialCenter.getX() - initialPoint.getX(), initialCenter.getY() - initialPoint.getY());
-						break;
-					}
-					case SCALE:
-					{
-						motionType = Motion.SCALE;
-						initialCenter = focusedFigure.getCenter();
-						initialScale.add(figureRoot.getScaleX(), figureRoot.getScaleY());
-						initialVector.add(initialCenter.getX() - initialPoint.getX(), initialCenter.getY() - initialPoint.getY());
-						initialVectorMagnitude = initialVector.magnitude();
-						break;
-					}
-					default:
-						logger.warning("unkown motion type " + motionType);
-						break;
+					motionType = Motion.TRANSLATION;
+					initialTranslation.add(figureRoot.getTranslateX(), figureRoot.getTranslateY());
+				}
+				else if (shiftDown)
+				{
+					motionType = Motion.ROTATION;
+					initialCenter = focusedFigure.getCenter();
+					initialRotation = figureRoot.getRotate();
+					initialVector.add(initialCenter.getX() - initialPoint.getX(), initialCenter.getY() - initialPoint.getY());
+				}
+				else
+				{
+					motionType = Motion.SCALE;
+					initialCenter = focusedFigure.getCenter();
+					initialScale.add(figureRoot.getScaleX(), figureRoot.getScaleY());
+					initialVector.add(initialCenter.getX() - initialPoint.getX(), initialCenter.getY() - initialPoint.getY());
+					initialVectorMagnitude = initialVector.magnitude();
 				}
 
 				step++;
@@ -209,8 +200,9 @@ public class TransformTool extends FocusedFigureTool
 					 * DONE TransformTool#mouseDragged: Apply translation on #figureRoot:
 					 * 	- tx = initialTranslation.x + (event.x - initialPoint.x)
 					 */
-					figureRoot.setTranslateX(initialTranslation.getX() + (event.getX() - initialPoint.getX()));
-					figureRoot.setTranslateY(initialTranslation.getY() + (event.getY() - initialPoint.getY()));
+					Point2D tx = new Point2D(initialTranslation.getX() + (event.getX() - initialPoint.getX()), initialTranslation.getY() + (event.getY() - initialPoint.getY()));
+					figureRoot.setTranslateX(tx.getX());
+					figureRoot.setTranslateY(tx.getY());
 					break;
 				}
 				case ROTATION:
@@ -220,7 +212,9 @@ public class TransformTool extends FocusedFigureTool
 					 * 	- v = (event - center) vector
 					 * 	- r = initialRotation + v.angle(initialVector)
 					 */
-					figureRoot.setRotate(initialRotation);
+					Point2D v = new Point2D(event.getX() - initialCenter.getX(), event.getY() - initialCenter.getY());
+					double r = initialRotation + v.angle(initialVector);
+					figureRoot.setRotate(r);
 					break;
 				}
 				case SCALE:
@@ -230,8 +224,10 @@ public class TransformTool extends FocusedFigureTool
 					 * 	- v = (event - center) vector
 					 * 	- sx = initialScale.x + (|v| / |initialVector|)
 					 */
-					figureRoot.setScaleX(initialScale.getX());
-					figureRoot.setScaleY(initialVector.getY());
+					Point2D v = new Point2D(event.getX() - initialCenter.getX(), event.getY() - initialCenter.getY());
+					Point2D sx = new Point2D(initialScale.getX() + (v.getX() / initialVector.getX()), initialScale.getY() + (v.getY() / initialVector.getY()));
+					figureRoot.setScaleX(sx.getX());
+					figureRoot.setScaleY(sx.getY());
 					break;
 				}
 				default:
