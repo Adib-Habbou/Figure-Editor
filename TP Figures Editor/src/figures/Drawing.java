@@ -512,14 +512,12 @@ public class Drawing extends ModifiableObservableListBase<Figure>
 	 */
 	public void clearSelection()
 	{
-		// TODO Drawing#clearSelection ...
-		/*
-		for (int i = 0; i <= figures.length(); i++)
+		// DONE Drawing#clearSelection ...
+		for (Figure figure : figures)
 		{
-			updateSelection(i, onChanged());
+			int index = figures.indexOf(figure);
+			updateSelection(index, false);
 		}
-		*/
-		
 	}
 
 	/**

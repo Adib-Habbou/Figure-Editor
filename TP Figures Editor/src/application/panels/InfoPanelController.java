@@ -327,4 +327,5 @@ public class InfoPanelController extends FocusedFigureTool
 		rotationLabel =  null;
 		scaleLabel =  null;
 	}
+	
 }
