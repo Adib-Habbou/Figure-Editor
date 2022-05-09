@@ -196,7 +196,7 @@ public abstract class Figure implements Prototype<Figure>
 		     (!figure.edgeColor.isPresent() ? null : figure.edgeColor.get()),
 		     figure.lineType,
 		     figure.lineWidth,
-		     figure.logger);
+		     figure.logger.getParent());
 		instanceNumber = figure.instanceNumber;
 		if (figure.shape == null)
 		{

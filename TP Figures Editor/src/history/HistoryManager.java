@@ -129,12 +129,9 @@ public class HistoryManager<E extends Prototype<E>>
 	public void record()
 	{
 		// DONE HistoryManager#record ...
-		/*
 		Memento<E> memento = originator.createMemento();
 		pushUndo(memento);
 		redoStack.clear();
-		*/
-		// bug createMemento on trace un cercle et quand on trace le deuxieme l'app crash
 	}
 
 	/**
