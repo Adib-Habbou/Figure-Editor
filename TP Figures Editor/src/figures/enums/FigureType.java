@@ -7,6 +7,7 @@ import java.util.logging.Logger;
 import figures.Circle;
 import figures.Drawing;
 import figures.Figure;
+import figures.Rectangle;
 import history.HistoryManager;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
@@ -102,11 +103,11 @@ public enum FigureType
 				return null;
 			case RECTANGLE:
 				// DONE FigureType#getFigure RECTANGLE case ...
-				/*
+				
 				return new Rectangle(fillColor, edgeColor, lineType, lineWidth, parentLogger, x, y);
-		        */
-				parentLogger.severe(toString() + " case not yet implemented");
-				return null;
+		        
+				//parentLogger.severe(toString() + " case not yet implemented");
+				//return null;
 			case ROUNDED_RECTANGLE:
 				// DONE FigureType#getFigure ROUNDED_RECTANGLE case ...
 				/*

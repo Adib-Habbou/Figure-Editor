@@ -32,7 +32,6 @@
             <Font name="System Bold" size="18.0" />
          </font>
       </Label>
-<<<<<<< HEAD
       <Label text="Type" GridPane.rowIndex="1" />
       <Label text="Fill" GridPane.rowIndex="2" />
       <Label text="Stroke" GridPane.rowIndex="3" />
@@ -45,20 +44,17 @@
       <Label text="translation" GridPane.rowIndex="9" />
       <Label text="rotation" GridPane.rowIndex="10" />
       <Label text="scale" GridPane.rowIndex="11" />
-      <Label fx:id="topLeftXLabel" GridPane.columnIndex="1" GridPane.rowIndex="5" />
-      <Label fx:id="topLeftYLabel" GridPane.columnIndex="2" GridPane.rowIndex="5" />
-      <Label fx:id="bottomRightXLabel" GridPane.columnIndex="1" GridPane.rowIndex="6" />
-      <Label fx:id="bottomRightYLabel" GridPane.columnIndex="2" GridPane.rowIndex="6" />
-      <Label fx:id="widthLabel" GridPane.columnIndex="1" GridPane.rowIndex="7" />
-      <Label fx:id="heightLabel" GridPane.columnIndex="2" GridPane.rowIndex="7" />
-      <Label fx:id="centerXLabel" GridPane.columnIndex="1" GridPane.rowIndex="8" />
-      <Label fx:id="centerYLabel" GridPane.columnIndex="2" GridPane.rowIndex="8" />
-      <Label fx:id="translationXLabel" GridPane.columnIndex="1" GridPane.rowIndex="9" />
-      <Label fx:id="translationYLabel" GridPane.columnIndex="2" GridPane.rowIndex="9" />
-      <Label fx:id="rotationLabel" GridPane.columnIndex="1" GridPane.rowIndex="10" />
-      <Label fx:id="scaleLabel" GridPane.columnIndex="1" GridPane.rowIndex="11" />
-      <ImageView fx:id="figureTypeImageView" fitHeight="32.0" fitWidth="69.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-=======
->>>>>>> 9ceebf88fab1c39493a5ebc6076e1cb1f273878a
+      <Label fx:id="topLeftXLabel" text="tlx" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+      <Label fx:id="topLeftYLabel" text="tly" GridPane.columnIndex="2" GridPane.rowIndex="5" />
+      <Label fx:id="bottomRightXLabel" text="brx" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+      <Label fx:id="bottomRightYLabel" text="bry" GridPane.columnIndex="2" GridPane.rowIndex="6" />
+      <Label fx:id="widthLabel" text="dx" GridPane.columnIndex="1" GridPane.rowIndex="7" />
+      <Label fx:id="heightLabel" text="dy" GridPane.columnIndex="2" GridPane.rowIndex="7" />
+      <Label fx:id="centerXLabel" text="cx" GridPane.columnIndex="1" GridPane.rowIndex="8" />
+      <Label fx:id="centerYLabel" text="cy" GridPane.columnIndex="2" GridPane.rowIndex="8" />
+      <Label fx:id="translationXLabel" text="tx" GridPane.columnIndex="1" GridPane.rowIndex="9" />
+      <Label fx:id="translationYLabel" text="ty" GridPane.columnIndex="2" GridPane.rowIndex="9" />
+      <Label fx:id="rotationLabel" text="r" GridPane.columnIndex="1" GridPane.rowIndex="10" />
+      <Label fx:id="scaleLabel" text="s" GridPane.columnIndex="1" GridPane.rowIndex="11" />
    </children>
 </GridPane>

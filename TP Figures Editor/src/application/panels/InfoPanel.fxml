@@ -56,6 +56,5 @@
       <Label fx:id="translationYLabel" text="ty" GridPane.columnIndex="2" GridPane.rowIndex="9" />
       <Label fx:id="rotationLabel" text="r" GridPane.columnIndex="1" GridPane.rowIndex="10" />
       <Label fx:id="scaleLabel" text="s" GridPane.columnIndex="1" GridPane.rowIndex="11" />
-      <ImageView fx:id="figureTypeImageView" fitHeight="32.0" fitWidth="69.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="1" />
    </children>
 </GridPane>
