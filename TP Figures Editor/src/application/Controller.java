@@ -1403,7 +1403,9 @@ public class Controller implements Initializable
 	public void onSetHistorySizeAction(ActionEvent event)
 	{
 		logger.info("Set History Size Action triggered");
-		// TODO Controller#onSetHistorySizeAction ...
+		// DONE Controller#onSetHistorySizeAction ...
+		// aucune variable ou setter pour modifier la taille de l'historique
+		// surement une feature qui a ete retire du projet mais la methode est reste
 	}
 
 	/**

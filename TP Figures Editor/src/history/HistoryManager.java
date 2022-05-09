@@ -128,7 +128,7 @@ public class HistoryManager<E extends Prototype<E>>
 	 */
 	public void record()
 	{
-		// DONE HistoryManager#record ...
+		// TODO HistoryManager#record ...
 		/*
 		Memento<E> memento = originator.createMemento();
 		pushUndo(memento);
@@ -148,11 +148,11 @@ public class HistoryManager<E extends Prototype<E>>
 	public void undo()
 	{
 		// DONE HistoryManager#undo ...
-		Memento<E> state = originator.createMemento();
-		pushRedo(state);
+		// Memento<E> state = originator.createMemento();
 		Memento<E> result = popUndo();
 		if (result != null)
 		{
+			pushRedo(result);
 			originator.setMemento(result);
 		}
 	}
