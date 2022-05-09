@@ -103,11 +103,7 @@ public enum FigureType
 				return null;
 			case RECTANGLE:
 				// DONE FigureType#getFigure RECTANGLE case ...
-				
 				return new Rectangle(fillColor, edgeColor, lineType, lineWidth, parentLogger, x, y);
-		        
-				//parentLogger.severe(toString() + " case not yet implemented");
-				//return null;
 			case ROUNDED_RECTANGLE:
 				// DONE FigureType#getFigure ROUNDED_RECTANGLE case ...
 				/*
