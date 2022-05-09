@@ -1436,7 +1436,6 @@ public class Controller implements Initializable
 				checkBox.setSelected(false);
 				fillColorPicker.setDisable(false);
 			}
-			return;
 		}
 
 		if (checkBox == useEdgeColor)
@@ -1447,7 +1446,6 @@ public class Controller implements Initializable
 				checkBox.setSelected(false);
 				edgeColorPicker.setDisable(false);
 			}
-			return;
 		}
 
 		logger.warning("event source is neither useFillColor nor useEdgeColor: "

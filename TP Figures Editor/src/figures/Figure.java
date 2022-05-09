@@ -373,7 +373,7 @@ public abstract class Figure implements Prototype<Figure>
 		 */
 		shape.setStroke(Color.TRANSPARENT);
 		shape.getStrokeDashArray().clear();
-		shape.getStrokeDashArray().setAll(25d, 10d);
+		shape.getStrokeDashArray().setAll(30d, 10d);
 	}
 
 	/**

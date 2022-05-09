@@ -242,14 +242,20 @@ public class HistoryManager<E extends Prototype<E>>
 	private boolean pushUndo(Memento<E> state)
 	{
 		// DONE HistoryManager#pushUndo ...
-				
-		if (state != null && state != undoStack.peekFirst() && undoStack.size() > 0)
-		{
-			undoStack.removeLast();
-			undoStack.push(state);
-			return true;
-		}
 		
+		if (state != null)
+		{	
+			Memento <E> lastPushed = undoStack.peekFirst();
+			if (state.equals(lastPushed))
+			{
+				undoStack.push(state);
+				if (undoStack.size() > this.size())
+				{
+					undoStack.removeLast();
+				}
+				return true;
+			}
+		}
 		return false;
 	}
 
@@ -291,13 +297,19 @@ public class HistoryManager<E extends Prototype<E>>
 	{
 		// DONE HistoryManager#pushRedo ...
 		
-		if (state != null && state != redoStack.peekFirst() && redoStack.size() > 0)
+		if (state != null)
 		{
-			redoStack.removeLast();
-			redoStack.push(state);
-			return true;
+			Memento <E> lastPushed = redoStack.peekFirst();
+			if (state.equals(lastPushed))
+			{
+				redoStack.push(state);
+				if (redoStack.size() > this.size())
+				{
+					redoStack.removeLast();
+				}		
+				return true;
+			}
 		}
-		
 		return false;
 	}
 

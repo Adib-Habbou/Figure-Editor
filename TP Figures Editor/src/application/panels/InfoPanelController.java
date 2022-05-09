@@ -287,17 +287,17 @@ public class InfoPanelController extends FocusedFigureTool
 			fillColorCircle.setFill(figure.getFillColor());
 			edgeColorCircle.setFill(figure.getEdgeColor());
 			
-			topLeftXLabel.setText("" +  figure.topLeft().getX());
-			topLeftYLabel.setText("" + figure.topLeft().getY());
+			topLeftXLabel.setText(Double.toString(figure.topLeft().getX()));
+			topLeftYLabel.setText(Double.toString(figure.topLeft().getY()));
 			
-			bottomRightXLabel.setText("" + figure.bottomRight().getX());
-			bottomRightYLabel.setText("" + figure.bottomRight().getY());
+			bottomRightXLabel.setText(Double.toString(figure.bottomRight().getX()));
+			bottomRightYLabel.setText(Double.toString(figure.bottomRight().getY()));
 			
-			widthLabel.setText("" + figure.width());
-			heightLabel.setText("" + figure.height());
+			widthLabel.setText(Double.toString(figure.width()));
+			heightLabel.setText(Double.toString(figure.height()));
 			
-			centerXLabel.setText("" + figure.getCenter().getX());
-			centerYLabel.setText("" + figure.getCenter().getY());
+			centerXLabel.setText(Double.toString(figure.getCenter().getX()));
+			centerYLabel.setText(Double.toString(figure.getCenter().getY()));
 			
 			translationXLabel.setText("15");
 			translationYLabel.setText("15");

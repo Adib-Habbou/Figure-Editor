@@ -150,7 +150,7 @@ public class TransformTool extends FocusedFigureTool
 				  * depending of the type of motion
 				  */
 				
-				if(controlDown)
+				if (controlDown)
 				{
 					motionType = Motion.SCALE;
 					initialTranslation.add(figureRoot.getTranslateX(), figureRoot.getTranslateY());
