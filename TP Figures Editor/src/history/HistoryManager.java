@@ -180,11 +180,11 @@ public class HistoryManager<E extends Prototype<E>>
 	public void redo()
 	{
 		// DONE HistoryManager#redo ...
-		Memento<E> state = originator.createMemento();
-		pushUndo(state);
+		// Memento<E> state = originator.createMemento();
 		Memento<E> result = popRedo();
 		if (result != null)
 		{
+			pushUndo(result);
 			originator.setMemento(result);
 		}
 	}
