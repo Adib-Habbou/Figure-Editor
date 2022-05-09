@@ -1404,8 +1404,7 @@ public class Controller implements Initializable
 	{
 		logger.info("Set History Size Action triggered");
 		// DONE Controller#onSetHistorySizeAction ...
-		// aucune variable ou setter pour modifier la taille de l'historique
-		// surement une feature qui a ete retire du projet mais la methode est reste
+		historyManager.size(); // la methode public int size() est dans history manager cf Complements.pdf
 	}
 
 	/**
