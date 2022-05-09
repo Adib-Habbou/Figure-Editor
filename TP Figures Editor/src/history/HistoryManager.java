@@ -79,6 +79,16 @@ public class HistoryManager<E extends Prototype<E>>
 		undoStack.clear();
 		redoStack.clear();
 	}
+	
+	/**
+	 * Maximum number of elements in {@link #undoStack} or {@link #redoStack}
+	 * @return the maximum number of elements in {@link #undoStack} or {@link #redoStack}
+	 */
+	public int size()
+	{
+		return this.size;
+	}
+	// la methode public int size() est utilise dans Controller pour onSetHistorySizeAction cf Complements.pdf
 
 	/**
 	 * Number of elements in {@link #undoStack}
