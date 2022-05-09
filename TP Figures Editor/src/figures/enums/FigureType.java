@@ -6,6 +6,7 @@ import java.util.logging.Logger;
 
 import figures.Circle;
 import figures.Drawing;
+import figures.Ellipse;
 import figures.Figure;
 import figures.Rectangle;
 import history.HistoryManager;
@@ -96,11 +97,11 @@ public enum FigureType
 				                  y);
 			case ELLIPSE:
 				// DONE FigureType#getFigure ELLIPSE case ...
-				/*
+				
 				return new Ellipse(fillColor, edgeColor, lineType, lineWidth, parentLogger, x, y);
-		        */
-				parentLogger.severe(toString() + " case not yet implemented");
-				return null;
+		        
+				//parentLogger.severe(toString() + " case not yet implemented");
+				//return null;
 			case RECTANGLE:
 				// DONE FigureType#getFigure RECTANGLE case ...
 				

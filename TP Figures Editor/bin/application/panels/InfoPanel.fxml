@@ -44,7 +44,6 @@
       <Label text="translation" GridPane.rowIndex="9" />
       <Label text="rotation" GridPane.rowIndex="10" />
       <Label text="scale" GridPane.rowIndex="11" />
-<<<<<<< HEAD
       <Label fx:id="topLeftXLabel" text="tlx" GridPane.columnIndex="1" GridPane.rowIndex="5" />
       <Label fx:id="topLeftYLabel" text="tly" GridPane.columnIndex="2" GridPane.rowIndex="5" />
       <Label fx:id="bottomRightXLabel" text="brx" GridPane.columnIndex="1" GridPane.rowIndex="6" />
@@ -57,19 +56,5 @@
       <Label fx:id="translationYLabel" text="ty" GridPane.columnIndex="2" GridPane.rowIndex="9" />
       <Label fx:id="rotationLabel" text="r" GridPane.columnIndex="1" GridPane.rowIndex="10" />
       <Label fx:id="scaleLabel" text="s" GridPane.columnIndex="1" GridPane.rowIndex="11" />
-=======
-      <Label fx:id="topLeftXLabel" GridPane.columnIndex="1" GridPane.rowIndex="5" />
-      <Label fx:id="topLeftYLabel" GridPane.columnIndex="2" GridPane.rowIndex="5" />
-      <Label fx:id="bottomRightXLabel" GridPane.columnIndex="1" GridPane.rowIndex="6" />
-      <Label fx:id="bottomRightYLabel" GridPane.columnIndex="2" GridPane.rowIndex="6" />
-      <Label fx:id="widthLabel" GridPane.columnIndex="1" GridPane.rowIndex="7" />
-      <Label fx:id="heightLabel" GridPane.columnIndex="2" GridPane.rowIndex="7" />
-      <Label fx:id="centerXLabel" GridPane.columnIndex="1" GridPane.rowIndex="8" />
-      <Label fx:id="centerYLabel" GridPane.columnIndex="2" GridPane.rowIndex="8" />
-      <Label fx:id="translationXLabel" GridPane.columnIndex="1" GridPane.rowIndex="9" />
-      <Label fx:id="translationYLabel" GridPane.columnIndex="2" GridPane.rowIndex="9" />
-      <Label fx:id="rotationLabel" GridPane.columnIndex="1" GridPane.rowIndex="10" />
-      <Label fx:id="scaleLabel" GridPane.columnIndex="1" GridPane.rowIndex="11" />
->>>>>>> f91a3089554ff6ca48fe1f2b8eb734bf3c8c29f3
    </children>
 </GridPane>
