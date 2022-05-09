@@ -26,41 +26,37 @@
       <RowConstraints maxHeight="15.0" minHeight="15.0" prefHeight="30.0" vgrow="SOMETIMES" />
       <RowConstraints maxHeight="15.0" minHeight="15.0" prefHeight="30.0" vgrow="SOMETIMES" />
       <RowConstraints maxHeight="15.0" minHeight="15.0" prefHeight="30.0" vgrow="SOMETIMES" />
-      <RowConstraints maxHeight="15.0" minHeight="15.0" prefHeight="30.0" vgrow="SOMETIMES" />
   </rowConstraints>
    <children>
-      <Label fx:id="figureNameLabel" onMouseEntered="#mouseEnteredTarget" onMouseExited="#mouseExitedTarget" text="Name" GridPane.columnSpan="2147483647" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+      <Label fx:id="figureNameLabel" text="Name" GridPane.columnSpan="2147483647" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
          <font>
             <Font name="System Bold" size="18.0" />
          </font>
       </Label>
       <Label text="Type" GridPane.rowIndex="1" />
-      <Label text="Stroke" GridPane.rowIndex="3" />
       <Label text="Fill" GridPane.rowIndex="2" />
+      <Label text="Stroke" GridPane.rowIndex="3" />
       <Label text="x" GridPane.columnIndex="1" GridPane.rowIndex="4" />
       <Label text="y" GridPane.columnIndex="2" GridPane.rowIndex="4" />
-      <Label text="Top Left" GridPane.rowIndex="5" />
-      <Label text="Bottom Right" GridPane.rowIndex="6" />
-      <Label text="Dimensions" GridPane.rowIndex="7" />
-      <Label text="Center" GridPane.rowIndex="8" />
-      <Label text="Translation" GridPane.rowIndex="9" />
-      <Label text="Rotation" GridPane.rowIndex="10" />
-      <Label text="Scale" GridPane.rowIndex="11" />
-      <Label fx:id="topLeftXLabel" onMouseEntered="#mouseEnteredTarget" onMouseExited="#mouseExitedTarget" text="tlx" GridPane.columnIndex="1" GridPane.rowIndex="5" />
-      <Label fx:id="topLeftYLabel" onMouseEntered="#mouseEnteredTarget" onMouseExited="#mouseExitedTarget" text="tly" GridPane.columnIndex="2" GridPane.rowIndex="5" />
-      <Label fx:id="bottomRightXLabel" onMouseEntered="#mouseEnteredTarget" onMouseExited="#mouseExitedTarget" text="brx" GridPane.columnIndex="1" GridPane.rowIndex="6" />
-      <Label fx:id="bottomRightYLabel" onMouseEntered="#mouseEnteredTarget" onMouseExited="#mouseExitedTarget" text="bry" GridPane.columnIndex="2" GridPane.rowIndex="6" />
-      <Label fx:id="widthLabel" onMouseEntered="#mouseEnteredTarget" onMouseExited="#mouseExitedTarget" text="dx" GridPane.columnIndex="1" GridPane.rowIndex="7" />
-      <Label fx:id="heightLabel" onMouseEntered="#mouseEnteredTarget" onMouseExited="#mouseExitedTarget" text="dy" GridPane.columnIndex="2" GridPane.rowIndex="7" />
-      <Label fx:id="centerXLabel" onMouseEntered="#mouseEnteredTarget" onMouseExited="#mouseExitedTarget" text="cx" GridPane.columnIndex="1" GridPane.rowIndex="8" />
-      <Label fx:id="centerYLabel" onMouseEntered="#mouseEnteredTarget" onMouseExited="#mouseExitedTarget" text="cy" GridPane.columnIndex="2" GridPane.rowIndex="8" />
-      <Label fx:id="translationXLabel" onMouseEntered="#mouseEnteredTarget" onMouseExited="#mouseExitedTarget" text="tx" GridPane.columnIndex="1" GridPane.rowIndex="9" />
-      <Label fx:id="translationYLabel" onMouseEntered="#mouseEnteredTarget" onMouseExited="#mouseExitedTarget" text="ty" GridPane.columnIndex="2" GridPane.rowIndex="9" />
-      <Label fx:id="rotationLabel" onMouseEntered="#mouseEnteredTarget" onMouseExited="#mouseExitedTarget" text="rot" GridPane.columnIndex="1" GridPane.rowIndex="10" />
-      <Label fx:id="scaleLabel" onMouseEntered="#mouseEnteredTarget" onMouseExited="#mouseExitedTarget" text="sca" GridPane.columnIndex="1" GridPane.rowIndex="11" />
-      <ImageView fx:id="figureTypeImageView" fitHeight="32.0" fitWidth="68.0" onMouseEntered="#mouseEnteredTarget" onMouseExited="#mouseExitedTarget" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-      <ImageView fx:id="fillColorCircle" fitHeight="32.0" fitWidth="68.0" onMouseEntered="#mouseEnteredTarget" onMouseExited="#mouseExitedTarget" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-      <ImageView fx:id="edgeColorCircle" fitHeight="32.0" fitWidth="68.0" onMouseEntered="#mouseEnteredTarget" onMouseExited="#mouseExitedTarget" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-      <ImageView fx:id="lineTypeImageView" fitHeight="32.0" fitWidth="68.0" onMouseEntered="#mouseEnteredTarget" onMouseExited="#mouseExitedTarget" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.rowIndex="3" />
+      <Label text="top left" GridPane.rowIndex="5" />
+      <Label text="bottom right" GridPane.rowIndex="6" />
+      <Label text="dimensions" GridPane.rowIndex="7" />
+      <Label text="center" GridPane.rowIndex="8" />
+      <Label text="translation" GridPane.rowIndex="9" />
+      <Label text="rotation" GridPane.rowIndex="10" />
+      <Label text="scale" GridPane.rowIndex="11" />
+      <Label fx:id="topLeftXLabel" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+      <Label fx:id="topLeftYLabel" GridPane.columnIndex="2" GridPane.rowIndex="5" />
+      <Label fx:id="bottomRightXLabel" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+      <Label fx:id="bottomRightYLabel" GridPane.columnIndex="2" GridPane.rowIndex="6" />
+      <Label fx:id="widthLabel" GridPane.columnIndex="1" GridPane.rowIndex="7" />
+      <Label fx:id="heightLabel" GridPane.columnIndex="2" GridPane.rowIndex="7" />
+      <Label fx:id="centerXLabel" GridPane.columnIndex="1" GridPane.rowIndex="8" />
+      <Label fx:id="centerYLabel" GridPane.columnIndex="2" GridPane.rowIndex="8" />
+      <Label fx:id="translationXLabel" GridPane.columnIndex="1" GridPane.rowIndex="9" />
+      <Label fx:id="translationYLabel" GridPane.columnIndex="2" GridPane.rowIndex="9" />
+      <Label fx:id="rotationLabel" GridPane.columnIndex="1" GridPane.rowIndex="10" />
+      <Label fx:id="scaleLabel" GridPane.columnIndex="1" GridPane.rowIndex="11" />
+      <ImageView fx:id="figureTypeImageView" fitHeight="32.0" fitWidth="69.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="1" />
    </children>
 </GridPane>
