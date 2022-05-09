@@ -136,7 +136,7 @@ public class TransformTool extends FocusedFigureTool
 			if (focusedFigure != null)
 			{
 				figureRoot = focusedFigure.getRoot();
-				boolean controlDown = event.isMetaDown();
+				boolean controlDown = event.isControlDown();
 				boolean shiftDown = event.isShiftDown();
 
 				 /*
