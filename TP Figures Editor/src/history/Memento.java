@@ -29,7 +29,7 @@ public class Memento<E extends Prototype<E>>
 		this.state = new ArrayList<E>();
 		for (E elt : things)
 		{
-			this.state.add(elt.clone());
+			this.state.add(elt);
 		}
 	}
 

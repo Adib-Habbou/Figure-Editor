@@ -327,7 +327,7 @@ public class InfoPanelController extends FocusedFigureTool
 		
 		fillColorCircle.setFill(Color.TRANSPARENT);
 		edgeColorCircle.setFill(Color.TRANSPARENT);
-		
+		*/
 		topLeftXLabel.setText("");
 		topLeftYLabel.setText("");
 		
@@ -345,7 +345,7 @@ public class InfoPanelController extends FocusedFigureTool
 		
 		rotationLabel.setText("");
 		scaleLabel.setText("");
-		*/
+		
 	}
 	
 }
