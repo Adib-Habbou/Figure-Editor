@@ -146,11 +146,10 @@ public class HistoryManager<E extends Prototype<E>>
 	public void undo()
 	{
 		// DONE HistoryManager#undo ...
-		// Memento<E> state = originator.createMemento();
 		Memento<E> result = popUndo();
 		if (result != null)
 		{
-			pushRedo(result);
+			pushRedo(originator.createMemento());
 			originator.setMemento(result);
 		}
 	}
@@ -178,11 +177,10 @@ public class HistoryManager<E extends Prototype<E>>
 	public void redo()
 	{
 		// DONE HistoryManager#redo ...
-		// Memento<E> state = originator.createMemento();
 		Memento<E> result = popRedo();
 		if (result != null)
 		{
-			pushUndo(result);
+			pushUndo(originator.createMemento());
 			originator.setMemento(result);
 		}
 	}
@@ -234,7 +232,7 @@ public class HistoryManager<E extends Prototype<E>>
 	private boolean pushUndo(Memento<E> state)
 	{
 		// DONE HistoryManager#pushUndo ...
-		
+				
 		if (state != null && state != undoStack.peekFirst() && undoStack.size() > 0)
 		{
 			undoStack.removeLast();
