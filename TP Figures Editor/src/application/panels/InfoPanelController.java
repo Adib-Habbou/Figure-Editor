@@ -271,30 +271,39 @@ public class InfoPanelController extends FocusedFigureTool
 		 * DONE InfoPanelController#fillInfoPanel Fill this panel's FXML attributes with data from figure
 		 */
 		
-		fillColorCircle.setFill(figure.getFillColor());
-		edgeColorCircle.setFill(figure.getEdgeColor());
-		topLeftXLabel.setText("" +  figure.topLeft().getX());
-		topLeftYLabel.setText("" + figure.topLeft().getY());
-		bottomRightXLabel.setText("" + figure.bottomRight().getX());
-		bottomRightYLabel.setText("" + figure.bottomRight().getY());
-		widthLabel.setText("" + figure.width());
-		heightLabel.setText("" + figure.height());
-		centerXLabel.setText("" + figure.getCenter().getX());
-		centerYLabel.setText("" + figure.getCenter().getY());
-		figureTypeImageView.setImage(IconFactory.getIcon(figure.getClass().getTypeName()));
-		figureNameLabel.setText(figure.getClass().getName());
-		translationXLabel.setText("0,0"); // not working
-		translationYLabel.setText("0,0"); // not working
-		rotationLabel.setText("0,0"); // not working
-		scaleLabel.setText("1,0"); // not working
-		
-		if (figure.getLineType() == LineType.DASHED)
+		else 
 		{
-			lineTypeImageView.setImage(IconFactory.getIcon("Stroke_Dashed"));
-		}
-		if (figure.getLineType() == LineType.SOLID)
-		{
-			lineTypeImageView.setImage(IconFactory.getIcon("Stroke_Solid"));
+			if (figure.getLineType() == LineType.DASHED)
+			{
+				lineTypeImageView.setImage(IconFactory.getIcon("Stroke_Dashed"));
+			}
+			if (figure.getLineType() == LineType.SOLID)
+			{
+				lineTypeImageView.setImage(IconFactory.getIcon("Stroke_Solid"));
+			}
+			
+			figureTypeImageView.setImage(IconFactory.getIcon(figure.getClass().getSimpleName()));
+			
+			fillColorCircle.setFill(figure.getFillColor());
+			edgeColorCircle.setFill(figure.getEdgeColor());
+			
+			topLeftXLabel.setText("" +  figure.topLeft().getX());
+			topLeftYLabel.setText("" + figure.topLeft().getY());
+			
+			bottomRightXLabel.setText("" + figure.bottomRight().getX());
+			bottomRightYLabel.setText("" + figure.bottomRight().getY());
+			
+			widthLabel.setText("" + figure.width());
+			heightLabel.setText("" + figure.height());
+			
+			centerXLabel.setText("" + figure.getCenter().getX());
+			centerYLabel.setText("" + figure.getCenter().getY());
+			
+			translationXLabel.setText("15");
+			translationYLabel.setText("15");
+			
+			rotationLabel.setText("0");
+			scaleLabel.setText("1");
 		}
 	}
 
@@ -302,30 +311,41 @@ public class InfoPanelController extends FocusedFigureTool
 	 * Clears Info Panel.
 	 * clearing all FXML related attributes either
 	 * with no text for {@link Label}s, {@link Color#TRANSPARENT} color for
-	 * {@link Circle}s and {@link #noneIcon} for emty images.
+	 * {@link Circle}s and {@link #noneIcon} for empty images.
 	 */
 	private void clearInfoPanel()
 	{
 		/*
 		 * DONE InfoPanelController#clearInfoPanel Clears this panel's FXML attributes content
 		 */
-		figureNameLabel = null;
-		figureTypeImageView =  null;
-		fillColorCircle =  null;
-		edgeColorCircle =  null;
-		lineTypeImageView =  null;
-		topLeftXLabel =  null;
-		topLeftYLabel =  null;
-		bottomRightXLabel =  null;
-		bottomRightYLabel =  null;
-		widthLabel =  null;
-		heightLabel =  null;
-		centerXLabel =  null;
-		centerYLabel =  null;
-		translationXLabel =  null;
-		translationYLabel =  null;
-		rotationLabel =  null;
-		scaleLabel =  null;
+		/*
+		lineTypeImageView.setImage(IconFactory.getIcon("Stroke_None"));
+		
+		lineTypeImageView.setImage(IconFactory.getIcon("Stroke_None"));
+		
+		figureTypeImageView.setImage(IconFactory.getIcon("Stroke_None"));
+		
+		fillColorCircle.setFill(Color.TRANSPARENT);
+		edgeColorCircle.setFill(Color.TRANSPARENT);
+		
+		topLeftXLabel.setText("");
+		topLeftYLabel.setText("");
+		
+		bottomRightXLabel.setText("");
+		bottomRightYLabel.setText("");
+		
+		widthLabel.setText("");
+		heightLabel.setText("");
+		
+		centerXLabel.setText("");
+		centerYLabel.setText("");
+		
+		translationXLabel.setText("");
+		translationYLabel.setText("");
+		
+		rotationLabel.setText("");
+		scaleLabel.setText("");
+		*/
 	}
 	
 }
