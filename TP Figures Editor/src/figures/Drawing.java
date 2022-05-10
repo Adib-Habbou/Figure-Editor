@@ -476,14 +476,19 @@ public class Drawing extends ModifiableObservableListBase<Figure>
 		 * newly created figure at location (x, y)
 		 */
 		
+		if (!hasFill() && !hasEdge())
+		{
+			return figureType.getFigure(null, null, getLineType(), getLineWidth(), logger, x, y);
+		}
+		
 		if (!hasFill())
 		{
-			return figureType.getFigure(Color.TRANSPARENT, getEdgeColor(), getLineType(), getLineWidth(), logger, x, y);
+			return figureType.getFigure(null, getEdgeColor(), getLineType(), getLineWidth(), logger, x, y);
 		}
 		
 		if (!hasEdge())
 		{
-			return figureType.getFigure(getFillColor(), Color.TRANSPARENT, getLineType(), getLineWidth(), logger, x, y);
+			return figureType.getFigure(getFillColor(), null, getLineType(), getLineWidth(), logger, x, y);
 		}
 		
 		return figureType.getFigure(getFillColor(), getEdgeColor(), getLineType(), getLineWidth(), logger, x, y);
