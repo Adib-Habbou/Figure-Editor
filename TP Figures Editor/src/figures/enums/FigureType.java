@@ -96,12 +96,8 @@ public enum FigureType
 				                  x,
 				                  y);
 			case ELLIPSE:
-				// DONE FigureType#getFigure ELLIPSE case ...
-				
+				// DONE FigureType#getFigure ELLIPSE case ...	
 				return new Ellipse(fillColor, edgeColor, lineType, lineWidth, parentLogger, x, y);
-		        
-				//parentLogger.severe(toString() + " case not yet implemented");
-				//return null;
 			case RECTANGLE:
 				// DONE FigureType#getFigure RECTANGLE case ...
 				return new Rectangle(fillColor, edgeColor, lineType, lineWidth, parentLogger, x, y);
