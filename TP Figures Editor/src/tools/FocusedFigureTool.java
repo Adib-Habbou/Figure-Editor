@@ -97,11 +97,20 @@ public class FocusedFigureTool extends AbstractDrawingTool<Pane>
 			 * DONE FocusedFigureTool#mouseEnteredTarget ...
 			 * 	- finds the corresponding Figure in drawingModel (if any)
 			 */
-			focusedFigure = drawingModel.fromShape((Shape) target);
+			
+			Shape focusedShape = (Shape) target;
+			Figure figure = drawingModel.fromShape(focusedShape);
+			focusedFigure = null;
+			
+			for (Figure fig : drawingModel)
+			{
+				if (figure.equals(fig))
+				{
+					focusedFigure = figure;
+				}
+			}
+			
 		}
-		
-		focusedFigure = null;
-		
 	}
 
 	/**

@@ -513,7 +513,7 @@ public class Drawing extends ModifiableObservableListBase<Figure>
 		 */
 		for (Figure figure : figures)
 		{
-			if (figure.root.getChildren().contains(shape))
+			if (figure.getShape() == shape)
 			{
 				return figure;
 			}

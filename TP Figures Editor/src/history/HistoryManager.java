@@ -79,16 +79,6 @@ public class HistoryManager<E extends Prototype<E>>
 		undoStack.clear();
 		redoStack.clear();
 	}
-	
-	/**
-	 * Maximum number of elements in {@link #undoStack} or {@link #redoStack}
-	 * @return the maximum number of elements in {@link #undoStack} or {@link #redoStack}
-	 */
-	public int size()
-	{
-		return this.size;
-	}
-	// la methode public int size() est utilise dans Controller pour onSetHistorySizeAction cf Complements.pdf
 
 	/**
 	 * Number of elements in {@link #undoStack}
@@ -109,6 +99,15 @@ public class HistoryManager<E extends Prototype<E>>
 	}
 
 	/**
+	 * Current maximum size
+	 * @return the current maximum size
+	 */
+	public int size()
+	{
+		return size; // used in Controller
+	}
+
+	/**
 	 * Resize {@link #undoStack} & {@link #redoStack} to new Size.
 	 * If current size > provided size, {@link #undoStack} & {@link #redoStack}
 	 * are trimmed to provided size, or left unchanged otherwise.
@@ -119,12 +118,16 @@ public class HistoryManager<E extends Prototype<E>>
 		if (this.size > size)
 		{
 			// DONE HistoryManager#setSize: Trim #undoStack & #redoStack if required
-			undoStack.removeLast();
-			redoStack.removeLast();
-			this.size = size;
+			while (undoStack.size() > size)
+			{
+				undoStack.removeLast();
+			}
+			while (redoStack.size() > size)
+			{
+				redoStack.removeLast();
+			}
 		}
-		undoSize();
-		redoSize();
+		this.size = size;
 	}
 
 	/**
@@ -138,9 +141,8 @@ public class HistoryManager<E extends Prototype<E>>
 	 */
 	public void record()
 	{
-		// DONE HistoryManager#record ...
-		Memento<E> memento = originator.createMemento();
-		pushUndo(memento);
+		//DONE HistoryManager#record ...
+		pushUndo(originator.createMemento());
 		redoStack.clear();
 	}
 
@@ -156,11 +158,11 @@ public class HistoryManager<E extends Prototype<E>>
 	public void undo()
 	{
 		// DONE HistoryManager#undo ...
-		Memento<E> result = popUndo();
-		if (result != null)
+		pushRedo(originator.createMemento());
+		Memento<E> memento = popUndo();
+		if(memento != null)
 		{
-			pushRedo(originator.createMemento());
-			originator.setMemento(result);
+			originator.setMemento(memento);
 		}
 	}
 
@@ -186,12 +188,12 @@ public class HistoryManager<E extends Prototype<E>>
 	 */
 	public void redo()
 	{
-		// DONE HistoryManager#redo ...
-		Memento<E> result = popRedo();
-		if (result != null)
+		//DONE HistoryManager#redo ...
+		pushUndo(originator.createMemento());
+		Memento<E> memento = popRedo();
+		if(memento != null)
 		{
-			pushUndo(originator.createMemento());
-			originator.setMemento(result);
+			originator.setMemento(memento);
 		}
 	}
 
@@ -241,20 +243,20 @@ public class HistoryManager<E extends Prototype<E>>
 	 */
 	private boolean pushUndo(Memento<E> state)
 	{
-		// DONE HistoryManager#pushUndo ...
+		//DONE HistoryManager#pushUndo ...
 		
-		if (state != null)
-		{	
-			Memento <E> lastPushed = undoStack.peekFirst();
-			if (state.equals(lastPushed))
+		Memento<E> lastPushed = undoStack.peekFirst();
+		
+		if (lastPushed == null || !lastPushed.equals(state))
+		{
+			if(undoStack.size() + 1 > size)
 			{
-				undoStack.push(state);
-				if (undoStack.size() > this.size())
-				{
-					undoStack.removeLast();
-				}
-				return true;
+				undoStack.removeLast();
 			}
+			
+			undoStack.push(state);
+			return true;
+			
 		}
 		return false;
 	}
@@ -270,9 +272,9 @@ public class HistoryManager<E extends Prototype<E>>
 	{
 		Memento<E> state = null;
 
-		// DONE HistoryManager#popUndo ...
+		//DONE HistoryManager#popUndo ...
 		
-		if (undoStack.size() > 0)
+		if(undoSize() > 0) 
 		{
 			state = undoStack.pop();
 		}
@@ -297,18 +299,18 @@ public class HistoryManager<E extends Prototype<E>>
 	{
 		// DONE HistoryManager#pushRedo ...
 		
-		if (state != null)
+		Memento<E> lastPushed = redoStack.peekFirst();
+		
+		if (lastPushed == null || !lastPushed.equals(state))
 		{
-			Memento <E> lastPushed = redoStack.peekFirst();
-			if (state.equals(lastPushed))
+			if (redoSize() + 1 > size)
 			{
-				redoStack.push(state);
-				if (redoStack.size() > this.size())
-				{
-					redoStack.removeLast();
-				}		
-				return true;
+				redoStack.removeLast();
 			}
+			
+			redoStack.push(state);
+			return true;
+			
 		}
 		return false;
 	}
@@ -324,13 +326,13 @@ public class HistoryManager<E extends Prototype<E>>
 	{
 		Memento<E> state = null;
 
-		// DONE HistoryManager#popRedo ...
-
-		if (redoStack.size() > 0)
+		//DONE HistoryManager#popRedo ...
+		
+		if(redoSize() > 0)
 		{
 			state = redoStack.pop();
 		}
-		
+
 		return state;
 	}
 }

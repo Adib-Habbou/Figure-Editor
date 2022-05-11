@@ -29,7 +29,7 @@ public class Memento<E extends Prototype<E>>
 		this.state = new ArrayList<E>();
 		for (E elt : things)
 		{
-			this.state.add(elt);
+			this.state.add(elt.clone());
 		}
 	}
 
@@ -68,30 +68,37 @@ public class Memento<E extends Prototype<E>>
 	 */
 	@Override
 	public boolean equals(Object obj)
-	{
-		// DONE Memento#equals ...
-		if (obj == this)
-		{
-			return true;
-		}
+    {
+        // DONE Memento#equals ...
 		
 		if (obj == null)
-		{
-			return false;
-		}
-				
-		if (obj instanceof Memento)
-		{
-			Memento<?> m = (Memento<?>) obj;
-			if (this.equals(m))
-			{
-				return true;
-			}
-		}
+	    {
+	        	return false;
+	    }
+		
+        if (obj == this)
+        {
+        	return true;
+        }
 
-		return false;
-	}
-
+        if (!(obj instanceof Memento<?>)) 
+        {
+        	return false;
+        }
+        
+        Memento object = (Memento) obj;
+        Iterator<E> a = object.getState().iterator();
+        Iterator<E> b = this.getState().iterator();
+        
+        while (b.hasNext() && a.hasNext())
+        {
+        	if (!b.next().equals(a.next())) return false;
+        }
+        
+        return b.hasNext() == a.hasNext();
+    }
+	
+	
 	/**
 	 * String representation of this object (for debug purposes)
 	 * @return a String representing this object; e.g. "[element1, element2, ...]"

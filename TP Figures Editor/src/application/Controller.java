@@ -654,7 +654,7 @@ public class Controller implements Initializable
 		 * DONE Controller#initialize: Setup #messagesLabel with empty or null message
 		 */
 
-		messagesLabel = null;
+		messagesLabel.setText(null);
 		
 		/*
 		 * DONE Controller#initialize: Bind #filterToggleButton, #filterToggleCheckMenuItem and
@@ -802,53 +802,51 @@ public class Controller implements Initializable
 		boolean selected = false;
 		
 		/*
-		 * DONE Controller#onEditAction ...
-		 * 	- setup selected from source (ToggleButton or CheckMenuItem)
-		 */
+		* DONE Controller#onEditAction ...
+		* - setup selected from source (ToggleButton or CheckMenuItem)
+		*/
 		
-		if (source instanceof ToggleButton)
+		selected = source instanceof CheckMenuItem ? ((CheckMenuItem)source).isSelected() : ((ToggleButton)source).isSelected();
+	
+		/*
+		* DONE Controller#onEditAction: Set Tools according to selected
+		*/
+		
+		setTools(selected);
+		
+		/*
+		* DONE Controller#onEditAction: if creation mode then turn off fitlering
+		* - uncheck #filterToggleButton when editing is off
+		* - calls onFilterAction
+		*/
+	
+		if (!selected)
 		{
-			selected = ((ToggleButton) source).isSelected();
+			if (filterToggleButton.isSelected())
+			{
+				filterToggleButton.setSelected(false);
+				onFilterAction(event);
+			}
 		}
-		
-		else
-		{
-			selected = ((CheckMenuItem) source).isSelected();
-		}
-		
+	
 		/*
-		 * DONE Controller#onEditAction: Set Tools according to selected
-		 */
-
-		applyOnOffIcons(editToggleButton, editToggleImageView, IconFactory.getIcon("edit"), IconFactory.getIcon("no_edit"));
-
-		/*
-		 * DONE Controller#onEditAction: if creation mode then turn off fitlering
-		 * 	- uncheck #filterToggleButton when editing is off
-		 * 	- calls onFilterAction
-		 */
-		
-		filterToggleButton.setSelected(false);
-		filterToggleButton.onActionProperty();
-		
-		/*
-		 * DONE Controller#onEditAction: Enable / Disable edit mode buttons
-		 * 	- #deleteButton
-		 * 	- #moveUpButton
-		 * 	- #moveDownButton
-		 * 	- #moveTopButton
-		 * 	- #moveBottomButton
-		 * 	- #applyStyleButton
-		 * 	- #filterToggleButton
-		 */
-		
-		deleteButton.setDisable(false);
-		moveUpButton.setDisable(false);
-		moveDownButton.setDisable(false);
-		moveTopButton.setDisable(false);
-		moveBottomButton.setDisable(false);
-		applyStyleButton.setDisable(false);
-		filterToggleButton.setDisable(false);
+		* DONE Controller#onEditAction: Enable / Disable edit mode buttons
+		* - #deleteButton
+		* - #moveUpButton
+		* - #moveDownButton
+		* - #moveTopButton
+		* - #moveBottomButton
+		* - #applyStyleButton
+		* - #filterToggleButton
+		*/
+	
+		deleteButton.setDisable(!selected);
+		moveUpButton.setDisable(!selected);
+		moveDownButton.setDisable(!selected);
+		moveTopButton.setDisable(!selected);
+		moveBottomButton.setDisable(!selected);
+		applyStyleButton.setDisable(!selected);
+		filterToggleButton.setDisable(!selected);
 	}
 
 	/**
@@ -918,16 +916,14 @@ public class Controller implements Initializable
 	{
 		logger.info("MoveUp Action triggered");
 		// DONE Controller#onMoveUpAction ...
-		for (int i = 0; i < drawingModel.size(); i++)
-		{
-			Figure figure = drawingModel.get(i);
-			if (figure.isSelected())
-			{
-				drawingModel.remove(figure);
-				drawingModel.add(i + 1, figure);
-				i++;
-			}
-		}
+        for (int i = 1; i < drawingModel.size(); i++)
+        {
+            if (drawingModel.get(i).isSelected())
+            {
+                Figure figure = drawingModel.remove(i);
+                drawingModel.add(i-1, figure);
+            }
+        }
 	}
 
 	/**

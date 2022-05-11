@@ -126,6 +126,7 @@ public class TransformTool extends FocusedFigureTool
 	public void mousePressed(MouseEvent event)
 	{
 		MouseButton button = event.getButton();
+		logger.info("Mouse Pressed");
 		if (button != MouseButton.PRIMARY)
 		{
 			return;
@@ -133,10 +134,12 @@ public class TransformTool extends FocusedFigureTool
 
 		if (step == 0)
 		{
+			logger.info("ici");
 			if (focusedFigure != null)
 			{
+				logger.info("j'entre pas la");
 				figureRoot = focusedFigure.getRoot();
-				boolean controlDown = event.isControlDown();
+				boolean controlDown = event.isControlDown(); //was event.isMetaDown()
 				boolean shiftDown = event.isShiftDown();
 
 				 /*
@@ -150,34 +153,36 @@ public class TransformTool extends FocusedFigureTool
 				  * depending of the type of motion
 				  */
 				
-				Point2D initialPoint = new Point2D(event.getX(), event.getY());
+				initialPoint = new Point2D(event.getX(),event.getY());
+				initialCenter = focusedFigure.getCenter();
 				
-				if (controlDown)
-				{
-					motionType = Motion.SCALE;
-					initialTranslation = new Point2D(figureRoot.getTranslateX(), figureRoot.getTranslateY());
-				}
-				
-				else if (shiftDown)
+				if (shiftDown)
 				{
 					motionType = Motion.ROTATION;
-					initialCenter = focusedFigure.getCenter();
 					initialRotation = figureRoot.getRotate();
-					initialVector = new Point2D(initialCenter.getX() - initialPoint.getX(), initialCenter.getY() - initialPoint.getY());
+					initialCenter = focusedFigure.getCenter();
+					initialVector = initialCenter.subtract(initialPoint).normalize();
+				}
+				
+				else if (controlDown)
+				{
+					motionType = Motion.SCALE;
+					initialScale = new Point2D(figureRoot.getScaleX(),figureRoot.getScaleY());
+					initialCenter = focusedFigure.getCenter();
+					initialVector = initialCenter.subtract(initialPoint);
+					initialVectorMagnitude = initialVector.magnitude();		
 				}
 				
 				else
 				{
 					motionType = Motion.TRANSLATION;
-					initialCenter = focusedFigure.getCenter();
-					initialScale = new Point2D(figureRoot.getScaleX(), figureRoot.getScaleY());
-					initialVector = new Point2D(initialCenter.getX() - initialPoint.getX(), initialCenter.getY() - initialPoint.getY());
-					initialVectorMagnitude = initialVector.magnitude();
+					initialTranslation = new Point2D(figureRoot.getTranslateX(), figureRoot.getTranslateY());
 				}
-
+				
 				step++;
 				event.consume();
 			}
+			logger.info("la");
 		}
 	}
 
@@ -204,9 +209,8 @@ public class TransformTool extends FocusedFigureTool
 					 * DONE TransformTool#mouseDragged: Apply translation on #figureRoot:
 					 * 	- tx = initialTranslation.x + (event.x - initialPoint.x)
 					 */
-					Point2D tx = new Point2D(initialTranslation.getX() + (event.getX() - initialPoint.getX()), initialTranslation.getY() + (event.getY() - initialPoint.getY()));
-					figureRoot.setTranslateX(tx.getX());
-					figureRoot.setTranslateY(tx.getY());
+					figureRoot.setTranslateX(initialTranslation.getX() + (event.getX() - initialPoint.getX()));
+					figureRoot.setTranslateY(initialTranslation.getY() + (event.getY() - initialPoint.getY()));
 					break;
 				}
 				case ROTATION:
@@ -216,7 +220,7 @@ public class TransformTool extends FocusedFigureTool
 					 * 	- v = (event - center) vector
 					 * 	- r = initialRotation + v.angle(initialVector)
 					 */
-					Point2D v = new Point2D(event.getX() - initialCenter.getX(), event.getY() - initialCenter.getY());
+					Point2D v = new Point2D(event.getX() - initialCenter.getX(),event.getY() - initialCenter.getY());
 					double r = initialRotation + v.angle(initialVector);
 					figureRoot.setRotate(r);
 					break;
@@ -228,10 +232,11 @@ public class TransformTool extends FocusedFigureTool
 					 * 	- v = (event - center) vector
 					 * 	- sx = initialScale.x + (|v| / |initialVector|)
 					 */
-					Point2D v = new Point2D(event.getX() - initialCenter.getX(), event.getY() - initialCenter.getY());
-					Point2D sx = new Point2D(initialScale.getX() + (v.getX() / initialVector.getX()), initialScale.getY() + (v.getY() / initialVector.getY()));
-					figureRoot.setScaleX(sx.getX());
-					figureRoot.setScaleY(sx.getY());
+					Point2D v = new Point2D(event.getX() - initialCenter.getX(),event.getY() - initialCenter.getY());
+					double sx = initialScale.getX() + v.magnitude() / initialVector.magnitude();
+					double sy = initialScale.getY() + v.magnitude() / initialVector.magnitude();
+					figureRoot.setScaleX(sx);
+					figureRoot.setScaleY(sy);
 					break;
 				}
 				default:

@@ -9,6 +9,7 @@ import figures.Drawing;
 import figures.Ellipse;
 import figures.Figure;
 import figures.Rectangle;
+import figures.Rounded_Rectangle;
 import history.HistoryManager;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
@@ -103,11 +104,7 @@ public enum FigureType
 				return new Rectangle(fillColor, edgeColor, lineType, lineWidth, parentLogger, x, y);
 			case ROUNDED_RECTANGLE:
 				// DONE FigureType#getFigure ROUNDED_RECTANGLE case ...
-				/*
-				return new RoundedRectangle(fillColor, edgeColor, lineType, lineWidth, parentLogger, x, y);
-		        */
-				parentLogger.severe(toString() + " case not yet implemented");
-				return null;
+				return new Rounded_Rectangle(fillColor, edgeColor, lineType, lineWidth, parentLogger, x, y);
 			case POLYGON:
 				// DONE FigureType#getFigure POLYGON case ...
 				/*
@@ -290,7 +287,6 @@ public enum FigureType
 			return CIRCLE;
 		}
 		
-		/*
 		if (type == Ellipse.class)
 		{
 			return ELLIPSE;
@@ -299,10 +295,12 @@ public enum FigureType
 		{
 			return RECTANGLE;
 		}
-		if (type == RoundedRectangle.class)
+		if (type == Rounded_Rectangle.class)
 		{
 			return ROUNDED_RECTANGLE;
 		}
+		
+		/*
 		if (type == Polygon.class)
 		{
 			return POLYGON;

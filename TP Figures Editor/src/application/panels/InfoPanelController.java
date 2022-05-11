@@ -271,40 +271,32 @@ public class InfoPanelController extends FocusedFigureTool
 		 * DONE InfoPanelController#fillInfoPanel Fill this panel's FXML attributes with data from figure
 		 */
 		
-		else 
-		{
-			if (figure.getLineType() == LineType.DASHED)
-			{
-				lineTypeImageView.setImage(IconFactory.getIcon("Stroke_Dashed"));
-			}
-			if (figure.getLineType() == LineType.SOLID)
-			{
-				lineTypeImageView.setImage(IconFactory.getIcon("Stroke_Solid"));
-			}
-			
-			figureTypeImageView.setImage(IconFactory.getIcon(figure.getClass().getSimpleName()));
-			
-			fillColorCircle.setFill(figure.getFillColor());
-			edgeColorCircle.setFill(figure.getEdgeColor());
-			
-			topLeftXLabel.setText(Double.toString(figure.topLeft().getX()));
-			topLeftYLabel.setText(Double.toString(figure.topLeft().getY()));
-			
-			bottomRightXLabel.setText(Double.toString(figure.bottomRight().getX()));
-			bottomRightYLabel.setText(Double.toString(figure.bottomRight().getY()));
-			
-			widthLabel.setText(Double.toString(figure.width()));
-			heightLabel.setText(Double.toString(figure.height()));
-			
-			centerXLabel.setText(Double.toString(figure.getCenter().getX()));
-			centerYLabel.setText(Double.toString(figure.getCenter().getY()));
-			
-			translationXLabel.setText("15");
-			translationYLabel.setText("15");
-			
-			rotationLabel.setText("0");
-			scaleLabel.setText("1");
-		}
+		figureNameLabel.setText(FigureType.fromFigure(figure).name());
+		
+		figureTypeImageView.setImage(FigureIconsFactory.getIconFromInstance(figure));
+		
+		lineTypeImageView.setImage(dashedIcon);
+		
+		fillColorCircle.setFill(figure.getFillColor());
+		edgeColorCircle.setFill(figure.getEdgeColor());
+		
+		topLeftXLabel.setText(String.format("%4.0f",figure.topLeft().getX()));
+		topLeftYLabel.setText(String.format("%4.0f",figure.topLeft().getY()));
+		
+		bottomRightXLabel.setText(String.format("%4.0f", figure.bottomRight().getX()));
+		bottomRightYLabel.setText(String.format("%4.0f", figure.bottomRight().getY()));
+		
+		widthLabel.setText(String.format("%4.0f", figure.width()));
+		heightLabel.setText(String.format("%4.0f", figure.height()));
+		
+		centerXLabel.setText(String.format("%4.0f", figure.getCenter().getX()));
+		centerYLabel.setText(String.format("%4.0f", figure.getCenter().getY()));
+		
+		translationXLabel.setText(String.format("%5.1f", figure.getRoot().getTranslateX()));
+		translationYLabel.setText(String.format("%5.1f", figure.getRoot().getTranslateY()));
+		
+		rotationLabel.setText(String.format("%5.1f", figure.getRoot().getRotate()));
+		scaleLabel.setText(String.format("%5.1f", figure.getRoot().getScaleX()));
 	}
 
 	/**
@@ -319,31 +311,32 @@ public class InfoPanelController extends FocusedFigureTool
 		 * DONE InfoPanelController#clearInfoPanel Clears this panel's FXML attributes content
 		 */
 		
-		//lineTypeImageView.setImage(IconFactory.getIcon("Stroke_None"));
+		figureNameLabel.setText(null);
 		
-		//figureTypeImageView.setImage(IconFactory.getIcon("Stroke_None"));
+		figureTypeImageView.setImage(null);
 		
-		//fillColorCircle.setFill(Color.TRANSPARENT);
-		//edgeColorCircle.setFill(Color.TRANSPARENT);
+		lineTypeImageView.setImage(null);
 		
-		topLeftXLabel.setText("");
-		topLeftYLabel.setText("");
+		fillColorCircle.setFill(Color.TRANSPARENT);
+		edgeColorCircle.setFill(Color.TRANSPARENT);
 		
-		bottomRightXLabel.setText("");
-		bottomRightYLabel.setText("");
+		topLeftXLabel.setText(null);
+		topLeftYLabel.setText(null);
 		
-		widthLabel.setText("");
-		heightLabel.setText("");
+		bottomRightXLabel.setText(null);
+		bottomRightYLabel.setText(null);
 		
-		centerXLabel.setText("");
-		centerYLabel.setText("");
+		widthLabel.setText(null);
+		heightLabel.setText(null);
 		
-		translationXLabel.setText("");
-		translationYLabel.setText("");
+		centerXLabel.setText(null);
+		centerYLabel.setText(null);
 		
-		rotationLabel.setText("");
-		scaleLabel.setText("");
+		translationXLabel.setText(null);
+		translationYLabel.setText(null);
 		
+		rotationLabel.setText(null);
+		scaleLabel.setText(null);
+
 	}
-	
 }

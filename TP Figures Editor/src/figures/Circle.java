@@ -128,6 +128,7 @@ public class Circle extends Figure
 		setSelected(figure.selected);
 	}
 
+
 	/**
 	 * Convenience method to get internal {@link Figure#shape} casted as a
 	 * {@link javafx.scene.shape.Circle}
