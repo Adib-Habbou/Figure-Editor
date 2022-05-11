@@ -150,24 +150,28 @@ public class TransformTool extends FocusedFigureTool
 				  * depending of the type of motion
 				  */
 				
+				Point2D initialPoint = new Point2D(event.getX(), event.getY());
+				
 				if (controlDown)
 				{
 					motionType = Motion.SCALE;
-					initialTranslation.add(figureRoot.getTranslateX(), figureRoot.getTranslateY());
+					initialTranslation = new Point2D(figureRoot.getTranslateX(), figureRoot.getTranslateY());
 				}
+				
 				else if (shiftDown)
 				{
 					motionType = Motion.ROTATION;
 					initialCenter = focusedFigure.getCenter();
 					initialRotation = figureRoot.getRotate();
-					initialVector.add(initialCenter.getX() - initialPoint.getX(), initialCenter.getY() - initialPoint.getY());
+					initialVector = new Point2D(initialCenter.getX() - initialPoint.getX(), initialCenter.getY() - initialPoint.getY());
 				}
+				
 				else
 				{
 					motionType = Motion.TRANSLATION;
 					initialCenter = focusedFigure.getCenter();
-					initialScale.add(figureRoot.getScaleX(), figureRoot.getScaleY());
-					initialVector.add(initialCenter.getX() - initialPoint.getX(), initialCenter.getY() - initialPoint.getY());
+					initialScale = new Point2D(figureRoot.getScaleX(), figureRoot.getScaleY());
+					initialVector = new Point2D(initialCenter.getX() - initialPoint.getX(), initialCenter.getY() - initialPoint.getY());
 					initialVectorMagnitude = initialVector.magnitude();
 				}
 

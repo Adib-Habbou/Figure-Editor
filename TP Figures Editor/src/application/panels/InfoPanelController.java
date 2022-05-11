@@ -319,18 +319,12 @@ public class InfoPanelController extends FocusedFigureTool
 		 * DONE InfoPanelController#clearInfoPanel Clears this panel's FXML attributes content
 		 */
 		
-		// Can't load FXML quand je decomente ceci :
+		//lineTypeImageView.setImage(IconFactory.getIcon("Stroke_None"));
 		
-		/*
-		lineTypeImageView.setImage(IconFactory.getIcon("Stroke_None"));
+		//figureTypeImageView.setImage(IconFactory.getIcon("Stroke_None"));
 		
-		lineTypeImageView.setImage(IconFactory.getIcon("Stroke_None"));
-		
-		figureTypeImageView.setImage(IconFactory.getIcon("Stroke_None"));
-		
-		fillColorCircle.setFill(Color.TRANSPARENT);
-		edgeColorCircle.setFill(Color.TRANSPARENT);
-		*/
+		//fillColorCircle.setFill(Color.TRANSPARENT);
+		//edgeColorCircle.setFill(Color.TRANSPARENT);
 		
 		topLeftXLabel.setText("");
 		topLeftYLabel.setText("");
