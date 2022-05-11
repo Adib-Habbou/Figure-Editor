@@ -861,30 +861,42 @@ public class Controller implements Initializable
 	protected void setTools(boolean editMode)
 	{
 		/*
-		 * DONE Controller#setTools ...
-		 * 	- unregister #currentTool & #transformTool
-		 * 	- if edit mode
-		 * 		- setup SelectionTool as currentTool
-		 * 		- setup transformTool
-		 * 	- if creation mode
-		 * 		- setup currentTool with the appropriate tool provided by
-		 * 		FigureType#getCreationTool
-		 */
+		* DONE Controller#setTools ...
+		* - unregister #currentTool & #transformTool
+		* - if edit mode
+		* - setup SelectionTool as currentTool
+		* - setup transformTool
+		* - if creation mode
+		* - setup currentTool with the appropriate tool provided by
+		* FigureType#getCreationTool
+		*/
+		
+		if (currentTool != null)
+		{
+			currentTool.unregister();
+		}
+		
+		if (transformTool != null)
+		{
+			transformTool.unregister();
+		}
+	
 		currentTool = null;
 		transformTool = null;
-
-		logger.info("Current tool = " + currentTool);
-		
+	
 		if (editMode)
 		{
 			currentTool = new SelectionTool(drawingPane, drawingModel, logger);
-			transformTool.setup(drawingPane, 0, editMode, editMode, logger);
-		} 
+			transformTool = new TransformTool(drawingPane, drawingModel, messagesLabel, logger);
+		}
+	
 		else
 		{
 			currentTool = drawingModel.getFigureType().getCreationTool(drawingPane, drawingModel, messagesLabel, historyManager, logger);
 		}
-		
+	
+		logger.info("Current tool = " + currentTool);
+
 	}
 
 	/**
