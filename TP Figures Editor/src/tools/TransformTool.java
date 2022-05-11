@@ -139,7 +139,7 @@ public class TransformTool extends FocusedFigureTool
 			{
 				logger.info("j'entre pas la");
 				figureRoot = focusedFigure.getRoot();
-				boolean controlDown = event.isControlDown(); //was event.isMetaDown()
+				boolean controlDown = event.isControlDown();
 				boolean shiftDown = event.isShiftDown();
 
 				 /*
