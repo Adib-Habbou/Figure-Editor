@@ -1322,7 +1322,12 @@ public class Controller implements Initializable
 		 * DONE Controller#onDisplayButtonsWithGraphicsOnlyAction ...
 		 * setting all elts in #styleableButtons content display to graphics only
 		 */
-		((Labeled) styleableButtons).setContentDisplay(ContentDisplay.GRAPHIC_ONLY);
+		
+		for (Labeled label : styleableButtons)
+		{
+			label.setContentDisplay(ContentDisplay.GRAPHIC_ONLY);
+		}
+		
 	}
 
 	/**
@@ -1337,7 +1342,11 @@ public class Controller implements Initializable
 		 * DONE Controller#onDisplayButtonsWithTextAndGraphicsAction ...
 		 * setting all elts in #styleableButtons content display to text and graphics
 		 */
-		((Labeled) styleableButtons).setContentDisplay(ContentDisplay.CENTER);
+		
+		for (Labeled label : styleableButtons)
+		{
+			label.setContentDisplay(ContentDisplay.CENTER);
+		}
 	}
 
 	/**
@@ -1352,7 +1361,12 @@ public class Controller implements Initializable
 		 * DONE Controller#onDisplayButtonsWithTextOnlyAction ...
 		 * setting all elts in #styleableButtons content display to text only
 		 */
-		((Labeled) styleableButtons).setContentDisplay(ContentDisplay.TEXT_ONLY);
+		
+		for (Labeled label : styleableButtons)
+		{
+			label.setContentDisplay(ContentDisplay.TEXT_ONLY);
+		}
+		
 	}
 
 	/**
