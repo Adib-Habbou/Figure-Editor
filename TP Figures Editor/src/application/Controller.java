@@ -931,7 +931,7 @@ public class Controller implements Initializable
 		
 		List<Integer> idFigure = new ArrayList<Integer>();
 		
-		for (int i = 0; i < drawingModel.size(); i++)
+		for (int i = 0; i < drawingModel.size() - 1; i++)
 		{
 			if (drawingModel.get(i).isSelected())
 			{
@@ -942,10 +942,6 @@ public class Controller implements Initializable
 			else
 			{
 				idFigure.add(i);
-				if (i == drawingModel.size() - 1)
-				{
-					idFigure.add(i+1);
-				}
 			}
 		}
 		
@@ -962,6 +958,7 @@ public class Controller implements Initializable
 		{
 			drawingModel.add(drawingModelCopy.get(id));
 		}
+		
 	}
 
 	/**
@@ -976,7 +973,7 @@ public class Controller implements Initializable
 		
 		List<Integer> idFigure = new ArrayList<Integer>();
 		
-		for (int i = drawingModel.size() - 1; i > -1; i--)
+		for (int i = drawingModel.size() - 1; i > 0; i--)
 		{
 			if (drawingModel.get(i).isSelected())
 			{
@@ -987,10 +984,6 @@ public class Controller implements Initializable
 			else
 			{
 				idFigure.add(i);
-				if (i == 0)
-				{
-					idFigure.add(i-1);
-				}
 			}
 		}
 		
@@ -1007,6 +1000,7 @@ public class Controller implements Initializable
 		{
 			drawingModel.add(drawingModelCopy.get(id));
 		}
+		
 	}
 	
 	/**
