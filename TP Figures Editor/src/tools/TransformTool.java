@@ -7,6 +7,7 @@ import java.util.logging.Logger;
 
 import figures.Drawing;
 import figures.Figure;
+import history.HistoryManager;
 import javafx.geometry.Point2D;
 import javafx.scene.Group;
 import javafx.scene.control.Label;
@@ -18,6 +19,8 @@ import javafx.scene.shape.Shape;
 /**
  * Tool allowing to move, scale or rotate {@link Shape}s
  * (and consequently {@link Figure}s under cursor
+ * @implSpec This tool needs a reference to a {@link HistoryManager} so it
+ * can record current state before starting moving shapes.
  * @author davidroussel
  */
 public class TransformTool extends FocusedFigureTool
@@ -26,7 +29,13 @@ public class TransformTool extends FocusedFigureTool
 	 * Message Label to show current transform
 	 */
 	protected Label messageLabel;
-
+	
+	/**
+     * The History manager (if provided) to record state before motion starts
+     * in {@link #mousePressed(MouseEvent)}.
+     */
+    protected HistoryManager<Figure> historyManager;
+	
 	/**
 	 * Internal current step
 	 */
@@ -102,12 +111,15 @@ public class TransformTool extends FocusedFigureTool
 	 * @param pane The pane to listen to events
 	 * @param model The Drawing model to act upon
 	 * @param message The message label used to show current transform.
+	 * @param manager the history manager to manage undo / redos during
+     * operations
 	 * @param parentLogger Parent logger
 	 */
-	public TransformTool(Pane pane, Drawing model, Label message, Logger parentLogger)
+	public TransformTool(Pane pane, Drawing model, Label message, HistoryManager<Figure> manager, Logger parentLogger)
 	{
 		super(pane, model, (PRESSED|DRAGGED|RELEASED), parentLogger);
 		messageLabel = message;
+		historyManager = manager;
 		step = 0;
 		figureRoot = null;
 		motionType = Motion.NONE;
@@ -126,7 +138,7 @@ public class TransformTool extends FocusedFigureTool
 	public void mousePressed(MouseEvent event)
 	{
 		MouseButton button = event.getButton();
-		logger.info("Mouse Pressed");
+		
 		if (button != MouseButton.PRIMARY)
 		{
 			return;
@@ -134,10 +146,13 @@ public class TransformTool extends FocusedFigureTool
 
 		if (step == 0)
 		{
-			logger.info("ici");
+			
 			if (focusedFigure != null)
 			{
-				logger.info("j'entre pas la");
+				if (historyManager != null)
+                {
+					historyManager.record();
+                }
 				figureRoot = focusedFigure.getRoot();
 				boolean controlDown = event.isControlDown();
 				boolean shiftDown = event.isShiftDown();
@@ -182,7 +197,6 @@ public class TransformTool extends FocusedFigureTool
 				step++;
 				event.consume();
 			}
-			logger.info("la");
 		}
 	}
 

@@ -107,23 +107,17 @@ public enum FigureType
 				return new Rounded_Rectangle(fillColor, edgeColor, lineType, lineWidth, parentLogger, x, y);
 			case POLYGON:
 				// DONE FigureType#getFigure POLYGON case ...
-				/*
-				return new Polygon(fillColor, edgeColor, lineType, lineWidth, parentLogger, x, y);
-		        */
+				//return new Polygon(fillColor, edgeColor, lineType, lineWidth, parentLogger, x, y);
 				parentLogger.severe(toString() + " case not yet implemented");
 				return null;
 			case NGON:
 				// DONE FigureType#getFigure NGON case ...
-				/*
-				return new Ngon(fillColor, edgeColor, lineType, lineWidth, parentLogger, x, y);
-		        */
+				//return new Ngon(fillColor, edgeColor, lineType, lineWidth, parentLogger, x, y);
 				parentLogger.severe(toString() + " case not yet implemented");
 				return null;
 			case STAR:
 				// DONE FigureType#getFigure STAR case ...
-				/*
-				return new Star(fillColor, edgeColor, lineType, lineWidth, parentLogger, x, y);
-		        */
+				// return new Star(fillColor, edgeColor, lineType, lineWidth, parentLogger, x, y);
 				parentLogger.severe(toString() + " case not yet implemented");
 				return null;
 		}

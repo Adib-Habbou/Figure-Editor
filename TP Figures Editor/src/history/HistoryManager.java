@@ -245,17 +245,19 @@ public class HistoryManager<E extends Prototype<E>>
 	{
 		//DONE HistoryManager#pushUndo ...
 		
-		Memento<E> lastPushed = undoStack.peekFirst();
-		
-		if (lastPushed == null || !lastPushed.equals(state))
+		if (state != null)
 		{
-			if(undoStack.size() + 1 > size)
+			Memento<E> lastPushed = undoStack.peekFirst();
+		
+			if(!(state.equals(lastPushed)))	
 			{
-				undoStack.removeLast();
+				if(undoStack.size() + 1 > size)
+				{
+					undoStack.removeLast();
+				}
+				undoStack.push(state);
+				return true;
 			}
-			
-			undoStack.push(state);
-			return true;
 			
 		}
 		return false;
@@ -274,7 +276,7 @@ public class HistoryManager<E extends Prototype<E>>
 
 		//DONE HistoryManager#popUndo ...
 		
-		if(undoSize() > 0) 
+		if(this.undoSize() > 0) 
 		{
 			state = undoStack.pop();
 		}
@@ -299,19 +301,21 @@ public class HistoryManager<E extends Prototype<E>>
 	{
 		// DONE HistoryManager#pushRedo ...
 		
-		Memento<E> lastPushed = redoStack.peekFirst();
-		
-		if (lastPushed == null || !lastPushed.equals(state))
+		if (state != null)
 		{
-			if (redoSize() + 1 > size)
+			Memento<E> lastPushed = redoStack.peekFirst();
+			
+			if (!(state.equals(lastPushed)))
 			{
-				redoStack.removeLast();
+				if (redoSize() + 1 > size)
+				{
+					redoStack.removeLast();
+				}
+				redoStack.push(state);
+				return true;
 			}
-			
-			redoStack.push(state);
-			return true;
-			
 		}
+		
 		return false;
 	}
 
@@ -328,7 +332,7 @@ public class HistoryManager<E extends Prototype<E>>
 
 		//DONE HistoryManager#popRedo ...
 		
-		if(redoSize() > 0)
+		if(this.redoSize() > 0)
 		{
 			state = redoStack.pop();
 		}

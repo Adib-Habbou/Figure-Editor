@@ -73,7 +73,7 @@ public class Memento<E extends Prototype<E>>
 		
 		if (obj == null)
 	    {
-	        	return false;
+	        return false;
 	    }
 		
         if (obj == this)
@@ -86,16 +86,19 @@ public class Memento<E extends Prototype<E>>
         	return false;
         }
         
-        Memento object = (Memento) obj;
-        Iterator<E> a = object.getState().iterator();
-        Iterator<E> b = this.getState().iterator();
+        // Memento object = (Memento) obj;
+        Iterator<?> a = ((Memento<?>) obj).getState().iterator();
+        Iterator<?> b = this.getState().iterator();
         
         while (b.hasNext() && a.hasNext())
         {
-        	if (!b.next().equals(a.next())) return false;
+        	if (!b.next().equals(a.next()))
+        	{
+        		return false;
+        	}
         }
         
-        return b.hasNext() == a.hasNext();
+        return (b.hasNext() == a.hasNext());
     }
 	
 	

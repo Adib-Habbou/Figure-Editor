@@ -887,7 +887,7 @@ public class Controller implements Initializable
 		if (editMode)
 		{
 			currentTool = new SelectionTool(drawingPane, drawingModel, logger);
-			transformTool = new TransformTool(drawingPane, drawingModel, messagesLabel, logger);
+			transformTool = new TransformTool(drawingPane, drawingModel, messagesLabel, historyManager, logger);
 		}
 	
 		else
@@ -947,16 +947,14 @@ public class Controller implements Initializable
 	{
 		logger.info("MoveDown Action triggered");
 		// DONE Controller#onMoveDownAction ...
-		for (int i = drawingModel.size(); i > 0; i--)
-		{
-			Figure figure = drawingModel.get(i);
-			if (figure.isSelected())
-			{
-				drawingModel.remove(figure);
-				drawingModel.add(i - 1, figure);
-				i--;
-			}
-		}
+        for (int i = drawingModel.size(); i > 0; i--)
+        {
+            if (drawingModel.get(i).isSelected())
+            {
+                Figure figure = drawingModel.remove(i);
+                drawingModel.add(i-1, figure);
+            }
+        }
 	}
 
 	/**
@@ -1066,7 +1064,7 @@ public class Controller implements Initializable
 		}
 		else
 		{
-			// drawingModel.filtered(figures);
+			drawingModel.filtered(figuresFilter);
 		}
 	}
 

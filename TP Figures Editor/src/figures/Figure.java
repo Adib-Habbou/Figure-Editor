@@ -192,8 +192,8 @@ public abstract class Figure implements Prototype<Figure>
 		 * Note: the provided figure is supposed to be in a consistant state:
 		 * Meaning it can not have both edge and fill colors as nulls.
 		 */
-		this((!figure.fillColor.isPresent() ? null : figure.fillColor.get()),
-		     (!figure.edgeColor.isPresent() ? null : figure.edgeColor.get()),
+		this(figure.getFillColor(),
+		     figure.getEdgeColor(),
 		     figure.lineType,
 		     figure.lineWidth,
 		     figure.logger.getParent());
@@ -421,7 +421,7 @@ public abstract class Figure implements Prototype<Figure>
 	 */
 	public void setSelected(boolean selected)
 	{
-		logger.info(this + " set selected = " + (selected ? "true" : "false"));
+		// logger.info(this + " set selected = " + (selected ? "true" : "false"));
 		this.selected = selected;
 		if (shape != null)
 		{
@@ -556,6 +556,7 @@ public abstract class Figure implements Prototype<Figure>
 	 * @see #width()
 	 * @see #height()
 	 */
+	@Deprecated
 	public void updateSelectionFrame()
 	{
 		// DONE Figure#updateSelectionFrame ...

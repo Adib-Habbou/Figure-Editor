@@ -272,12 +272,12 @@ public class Circle extends Figure
 
 		Circle circle = (Circle) figure;
 
-		if (Math.abs(getCenter().distance(circle.getCenter())) > 1e-6)
+		if (Math.abs(getCenter().distance(circle.getCenter())) > Figure.threshold)
 		{
 			return false;
 		}
 
-		if (Math.abs(getRadius() - circle.getRadius()) > 1e-6)
+		if (Math.abs(getRadius() - circle.getRadius()) > Figure.threshold)
 		{
 			return false;
 		}
