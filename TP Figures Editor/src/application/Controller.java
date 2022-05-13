@@ -928,14 +928,41 @@ public class Controller implements Initializable
 	{
 		logger.info("MoveUp Action triggered");
 		// DONE Controller#onMoveUpAction ...
-        for (int i = 1; i < drawingModel.size(); i++)
-        {
-            if (drawingModel.get(i).isSelected())
-            {
-                Figure figure = drawingModel.remove(i);
-                drawingModel.add(i-1, figure);
-            }
-        }
+		// bug quand on move up et qui rien au dessus la figure disparait
+		
+		List<Integer> idFigure = new ArrayList<Integer>();
+		
+		for (int i = 0; i < drawingModel.size(); i++)
+		{
+			if (drawingModel.get(i).isSelected())
+			{
+				idFigure.add(i+1);
+				idFigure.add(i);
+				i++;
+			}
+			else
+			{
+				idFigure.add(i);
+				if (i == drawingModel.size() - 1)
+				{
+					idFigure.add(i+1);
+				}
+			}
+		}
+		
+		List<Figure> drawingModelCopy = new ArrayList<Figure>();
+		
+		for (Figure figure : drawingModel)
+		{
+			drawingModelCopy.add(figure);
+		}
+		
+		drawingModel.clear();
+		
+		for (Integer id : idFigure)
+		{
+			drawingModel.add(drawingModelCopy.get(id));
+		}
 	}
 
 	/**
@@ -947,16 +974,41 @@ public class Controller implements Initializable
 	{
 		logger.info("MoveDown Action triggered");
 		// DONE Controller#onMoveDownAction ...
-        for (int i = drawingModel.size(); i > 0; i--)
-        {
-            if (drawingModel.get(i).isSelected())
-            {
-                Figure figure = drawingModel.remove(i);
-                drawingModel.add(i-1, figure);
-            }
-        }
+		
+		List<Integer> idFigure = new ArrayList<Integer>();
+		
+		for (int i = drawingModel.size(); i > 0; i--)
+		{
+			if (drawingModel.get(i).isSelected())
+			{
+				idFigure.add(i+1);
+				i--;
+			}
+			else
+			{
+				idFigure.add(i);
+				if (i == drawingModel.size() - 1)
+				{
+					idFigure.add(i+1);
+				}
+			}
+		}
+		
+		List<Figure> drawingModelCopy = new ArrayList<Figure>();
+		
+		for (Figure figure : drawingModel)
+		{
+			drawingModelCopy.add(figure);
+		}
+		
+		drawingModel.clear();
+		
+		for (Integer id : idFigure)
+		{
+			drawingModel.add(drawingModelCopy.get(id));
+		}
 	}
-
+	
 	/**
 	 * Action to Move selected figures on Top (after all other figures in {@link #drawingModel})
 	 * @param event event associated with this action

@@ -1,6 +1,3 @@
-/**
- *
- */
 package figures;
 
 import java.util.logging.Logger;
@@ -13,44 +10,44 @@ import javafx.scene.shape.Shape;
 import utils.ColorFactory;
 
 /**
- * Circle Figure containing a {@link javafx.scene.shape.Circle} as its
+ * Rectangle Figure containing a {@link javafx.scene.shape.Rectangle} as its
  * {@link Figure#shape}
- * @warning Since This class is also named "Circle", you'll need to use
- * (javafx.scene.shape.Circle) each time you need to acces to internal
- * {@link Figure#shape} casted as a {@link javafx.scene.shape.Circle}
+ * @warning Since This class is also named "Rectangle", you'll need to use
+ * (javafx.scene.shape.Rectangle) each time you need to acces to internal
+ * {@link Figure#shape} casted as a {@link javafx.scene.shape.Rectangle}
  * @implSpec It is assumed that {@link Figure#shape} will always be non null
- * during the life cycle of a Circle.
+ * during the life cycle of a Rectangle.
  * @author davidroussel
  */
 public class Rectangle extends Figure
 {
 	/**
 	 * Instances counter (to be used in {@link Figure#instanceNumber}) of each
-	 * Circle.
+	 * Rectangle.
 	 * @implNote No need to decrease {@link Figure#instanceNumber} in
 	 * {@link #finalize()}
 	 */
 	private static int counter = 0;
 
 	/**
-	 * Valued constructor to build a zero size Circle at point (x, y).
-	 * Used during Cicle construction with {@link MouseEvent}s
+	 * Valued constructor to build a zero size Rectangle at point (x, y).
+	 * Used during Rectangle construction with {@link MouseEvent}s
 	 * Calls super-constructor, sets {@link Figure#instanceNumber} then
 	 * {@link #createShape(double, double)} and attach {@link Figure#shape} to
 	 * {@link Figure#root}.
 	 * @param fillColor the fill color (or null if there is no fill color).
-	 * The fill color set in this circle shall be set from {@link ColorFactory}.
+	 * The fill color set in this Rectangle shall be set from {@link ColorFactory}.
 	 * @param edgeColor the edge color (or null if there is no edge color)
-	 * The edge color set in this circle shall be set from {@link ColorFactory}.
+	 * The edge color set in this Rectangle shall be set from {@link ColorFactory}.
 	 * @param lineType line type (Either {@link LineType#SOLID},
 	 * {@link LineType#DASHED} or {@link LineType#NONE}). If there is no edge
 	 * color provided the internal {@link #lineType} shall be set to
 	 * {@link LineType#NONE}
-	 * @param lineWidth line width of this circle. If there is no edge
+	 * @param lineWidth line width of this Rectangle. If there is no edge
 	 * color provided the internal {@link #lineType} shall be set to 0
 	 * @param parentLogger a parent logger used to initialize the current logger
-	 * @param x the initial x coordinate in the drawing panel where to create this circle
-	 * @param y the initial y coordinate in the drawing panel where to create this circle
+	 * @param x the initial x coordinate in the drawing panel where to create this Rectangle
+	 * @param y the initial y coordinate in the drawing panel where to create this Rectangle
 	 * @throws IllegalStateException if we try to set both fillColor and
 	 * edgecolor as nulls
 	 */
@@ -70,24 +67,25 @@ public class Rectangle extends Figure
 	}
 
 	/**
-	 * Valued constructor to build a Circle at point (x, y) with specified radius
+	 * Valued constructor to build a Rectangle at point (x, y) with specified width and height
 	 * Calls super-constructor, sets {@link Figure#instanceNumber} then
 	 * {@link #createShape(double, double)} and attach {@link Figure#shape} to
 	 * {@link Figure#root}.
 	 * @param fillColor the fill color (or null if there is no fill color).
-	 * The fill color set in this circle shall be set from {@link ColorFactory}.
+	 * The fill color set in this Rectangle shall be set from {@link ColorFactory}.
 	 * @param edgeColor the edge color (or null if there is no edge color)
-	 * The edge color set in this circle shall be set from {@link ColorFactory}.
+	 * The edge color set in this Rectangle shall be set from {@link ColorFactory}.
 	 * @param lineType line type (Either {@link LineType#SOLID},
 	 * {@link LineType#DASHED} or {@link LineType#NONE}). If there is no edge
 	 * color provided the internal {@link #lineType} shall be set to
 	 * {@link LineType#NONE}
-	 * @param lineWidth line width of this circle. If there is no edge
+	 * @param lineWidth line width of this Rectangle. If there is no edge
 	 * color provided the internal {@link #lineType} shall be set to 0
 	 * @param parentLogger a parent logger used to initialize the current logger
-	 * @param x the initial x coordinate in the drawing panel where to create this circle
-	 * @param y the initial y coordinate in the drawing panel where to create this circle
-	 * @param radius the initial radius of the circle
+	 * @param x the initial x coordinate in the drawing panel where to create this Rectangle
+	 * @param y the initial y coordinate in the drawing panel where to create this Rectangle
+	 * @param width the initial width of the Rectangle
+	 * @param height the initial height of the Rectangle
 	 * @throws IllegalStateException if we try to set both fillColor and
 	 * edgecolor as nulls
 	 */
@@ -98,32 +96,36 @@ public class Rectangle extends Figure
 	              Logger parentLogger,
 	              double x,
 	              double y,
-	              double height,
-	              double width)
+	              double width,
+	              double height)
 	    throws IllegalStateException
 	{
 		this(fillColor, edgeColor, lineType, lineWidth, parentLogger, x, y);
-		javafx.scene.shape.Rectangle rectangle = (javafx.scene.shape.Rectangle) shape;
-		rectangle.setHeight(height); rectangle.setWidth(width);
+		javafx.scene.shape.Rectangle Rectangle = (javafx.scene.shape.Rectangle) shape;
+		Rectangle.setHeight(Math.abs(height));
+		Rectangle.setWidth(Math.abs(width));
 	}
 
 	/**
 	 * Copy constructor
 	 * @param figure the figure to be copied
-	 * @throws IllegalArgumentException if the provided figure is not a Circle
+	 * @throws IllegalArgumentException if the provided figure is not a Rectangle
 	 */
 	public Rectangle(Figure figure) throws IllegalArgumentException
 	{
 		super(figure);
 		if (!(figure instanceof Rectangle))
 		{
-			String message = "provided figure is not a Circle: "
-				+ figure.getClass().getSimpleName();
+			String message = "provided figure is not a Rectangle: "
+			    + figure.getClass().getSimpleName();
 			logger.severe(message);
 			throw new IllegalArgumentException(message);
 		}
 		javafx.scene.shape.Rectangle figureRectangle = (javafx.scene.shape.Rectangle) figure.shape;
-		shape = new javafx.scene.shape.Rectangle(figureRectangle.getX(), figureRectangle.getY(), figureRectangle.getWidth(),figureRectangle.getHeight());
+		shape = new javafx.scene.shape.Rectangle(figureRectangle.getX(),
+		                                      figureRectangle.getY(),
+		                                      figureRectangle.getHeight(),
+		                                      figureRectangle.getWidth());
 		root.getChildren().add(shape);
 		applyParameters(shape);
 		setSelected(figure.selected);
@@ -131,9 +133,9 @@ public class Rectangle extends Figure
 
 	/**
 	 * Convenience method to get internal {@link Figure#shape} casted as a
-	 * {@link javafx.scene.shape.Circle}
+	 * {@link javafx.scene.shape.Rectangle}
 	 * @return the internal {@link Figure#shape} casted as a
-	 * {@link javafx.scene.shape.Circle}
+	 * {@link javafx.scene.shape.Rectangle}
 	 */
 	private javafx.scene.shape.Rectangle getRectangleShape()
 	{
@@ -148,7 +150,7 @@ public class Rectangle extends Figure
 	public Point2D getCenter()
 	{
 		javafx.scene.shape.Rectangle shapeRectangle = getRectangleShape();
-		return new Point2D((shapeRectangle.getX() + shapeRectangle.getWidth())/2, (shapeRectangle.getY()-shapeRectangle.getHeight())/2 );
+		return new Point2D(shapeRectangle.getX(), shapeRectangle.getY());
 	}
 
 	/**
@@ -178,8 +180,7 @@ public class Rectangle extends Figure
 	@Override
 	public Point2D topLeft()
 	{
-		javafx.scene.shape.Rectangle shapeRectangle = getRectangleShape();
-		return new Point2D(shapeRectangle.getX(), shapeRectangle.getY());
+		return new Point2D(getRectangleShape().getX(), getRectangleShape().getY());
 	}
 
 	/**
@@ -189,18 +190,11 @@ public class Rectangle extends Figure
 	@Override
 	public Point2D bottomRight()
 	{
-		javafx.scene.shape.Rectangle shapeRectangle = getRectangleShape();
-		return new Point2D(shapeRectangle.getX()+shapeRectangle.getWidth(), shapeRectangle.getY()-shapeRectangle.getHeight());
+
+		return new Point2D(getRectangleShape().getX() + getRectangleShape().getWidth(), getRectangleShape().getY() + getRectangleShape().getHeight());
 	}
 
-	/**
-	 * radius accessor of this Circle
-	 * @return the radius of this Circle
-	 */
-	public double getRadius()
-	{
-		return getCenter().distance(this.topLeft());
-	}
+	
 
 	/**
 	 * Creates actual {@link #shape} at specified position and apply
@@ -216,8 +210,8 @@ public class Rectangle extends Figure
 	public void createShape(double x, double y)
 	{
 		/*
-		 * Note: since This class is also named Circle we need to explicitely
-		 * use "new javafx.scene.shape.Circle(...)" here
+		 * Note: since This class is also named Rectangle we need to explicitly
+		 * use "new javafx.scene.shape.Rectangle(...)" here
 		 */
 		shape = new javafx.scene.shape.Rectangle(x, y, 0.0, 0.0);
 		applyParameters(shape);
@@ -226,22 +220,33 @@ public class Rectangle extends Figure
 
 	/**
 	 * Sets the last point of this figure.
-	 * Sets the radius of this Circle based on the distance between center and
+	 * Sets the width and height of this Rectangle based on the distance between center and
 	 * the provided point
-	 * @param lastPoint the point used to set this Circle's radius
+	 * @param lastPoint the point used to set this Rectangle's width and height
 	 */
 	@Override
 	public void setLastPoint(Point2D lastPoint)
 	{
-		double distanceX = lastPoint.getX() - getRectangleShape().getX() ;
-		double distanceY = lastPoint.getY() - getRectangleShape().getY() ;
-		getRectangleShape().setHeight(distanceY);
-		getRectangleShape().setWidth(distanceX);
+		double distanceX = getRectangleShape().getX() - lastPoint.getX();
+		double distanceY = getRectangleShape().getY() - lastPoint.getY();
+		
+		getRectangleShape().setWidth(Math.abs(distanceX));
+		getRectangleShape().setHeight(Math.abs(distanceY));
+		
+		if (distanceX > 0)
+		{
+			getRectangleShape().setTranslateX(-distanceX);
+		}
+		
+		if (distanceY > 0)
+		{
+			getRectangleShape().setTranslateY(-distanceY);
+		}
 	}
 
 	/**
-	 * Creates a copy of this circle (with the same name and instance number)
-	 * @return A distinct copy of this circle
+	 * Creates a copy of this Rectangle (with the same name and instance number)
+	 * @return A distinct copy of this Rectangle
 	 */
 	@Override
 	public Figure clone()
@@ -250,13 +255,13 @@ public class Rectangle extends Figure
 	}
 
 	/**
-	 * Compare this circle to another figure
-	 * @return true if the other figure is also a Circle with the same
-	 * position and size (with 1e-6 threhold), false otherwise.
+	 * Compare this Rectangle to another figure
+	 * @return true if the other figure is also a Rectangle with the same
+	 * position and size (with {@link Figure#threshold}), false otherwise.
 	 * Other parameters, such as {@link Figure#fillColor},
-	 * {@link Figure#edgeColor}, {@link Figure#lineType} and
-	 * {@link Figure#lineWidth} are checked in {@link Figure#equals(Object)}
-	 * @see Figure#equals(Object)
+	 * {@link Figure#edgeColor}, {@link Figure#lineType},
+	 * {@link Figure#lineWidth}, and transformations
+	 * are checked in {@link Figure#equals(Object)}
 	 */
 	@Override
 	protected boolean equals(Figure figure)
@@ -266,19 +271,19 @@ public class Rectangle extends Figure
 			return false;
 		}
 
-		Rectangle rectangle = (Rectangle) figure;
+		Rectangle Rectangle = (Rectangle) figure;
 
-		if (Math.abs(topLeft().distance(rectangle.topLeft())) > 1e-6)
+		if (Math.abs(getCenter().distance(Rectangle.getCenter())) > Figure.threshold)
 		{
 			return false;
 		}
 
-		if (Math.abs(height() - rectangle.height()) > 1e-6)
+		if (Math.abs(width() - Rectangle.width()) > Figure.threshold)
 		{
 			return false;
 		}
 		
-		if (Math.abs(width() - rectangle.width()) > 1e-6)
+		if (Math.abs(height() - Rectangle.height()) > Figure.threshold)
 		{
 			return false;
 		}
